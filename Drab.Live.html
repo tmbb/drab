@@ -1,0 +1,432 @@
+    <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="ExDoc v0.17.1">
+    <title>Drab.Live – drab v0.5.6</title>
+    <link rel="stylesheet" href="dist/app-110d9134a6.css" />
+    
+    
+      
+        <link rel="icon" type="image/png" href="assets/logo.png" />
+      
+      
+    
+    <script src="dist/sidebar_items-6fa2c1b3f2.js"></script>
+    <link rel="stylesheet" href="assets/makedown.css"/>
+  </head>
+  <body data-type="modules">
+    <script>try { if(localStorage.getItem('night-mode')) document.body.className += ' night-mode'; } catch (e) { }</script>
+
+    <div class="main">
+<button class="sidebar-toggle">
+  <span class="icon-menu" aria-hidden="true"></span>
+  <span class="sr-only">Toggle Sidebar</span>
+</button>
+<section class="sidebar">
+
+  
+  <a href="Drab.html" class="sidebar-projectLink">
+    <div class="sidebar-projectDetails">
+      <h1 class="sidebar-projectName">
+        drab
+      </h1>
+      <h2 class="sidebar-projectVersion">
+        v0.5.6
+      </h2>
+    </div>
+    
+      <img src="assets/logo.png" alt="drab" class="sidebar-projectImage">
+    
+  </a>
+
+  <form class="sidebar-search" action="search.html">
+    <button type="submit" class="search-button">
+      <span class="icon-search" aria-hidden="true"></span>
+    </button>
+    <input name="q" type="text" id="search-list" class="search-input" placeholder="search" aria-label="Search" autocomplete="off" />
+  </form>
+
+  <ul class="sidebar-listNav">
+    <li><a id="extras-list" href="#full-list">Pages</a></li>
+
+    
+      <li><a id="modules-list" href="#full-list">Modules</a></li>
+    
+
+    
+      <li><a id="exceptions-list" href="#full-list">Exceptions</a></li>
+    
+
+    
+      <li><a id="tasks-list" href="#full-list">Mix Tasks</a></li>
+    
+  </ul>
+  <div class="gradient"></div>
+  <ul id="full-list" class="sidebar-fullList"></ul>
+</section>
+
+<section class="content">
+  <div class="content-outer">
+    <div id="content" class="content-inner">
+
+
+      <h1>
+        <small class="visible-xs">drab v0.5.6</small>
+        Drab.Live
+        
+      </h1>
+
+      
+        <section id="moduledoc">
+          <p>Drab Module to provide a live access and update of assigns of the template, which is currently rendered and displayed
+in the browser.</p>
+<p>The idea is to reuse your Phoenix templates and let them live, to make a possibility to update assigns
+on the living page, from the Elixir, without reloading the whole stuff.</p>
+<p>Use <a href="#peek/2"><code class="inline">peek/2</code></a> to get the assign value, and <a href="#poke/2"><code class="inline">poke/2</code></a> to modify it directly in the DOM tree.</p>
+<p>Drab.Live uses the modified EEx Engine (<a href="Drab.Live.EExEngine.html"><code class="inline">Drab.Live.EExEngine</code></a>) to compile the template and indicate where assigns
+were rendered. To enable it, rename the template you want to go live from extension <code class="inline">.eex</code> to <code class="inline">.drab</code>. Then,
+add Drab Engine to the template engines in <code class="inline">config.exs</code>:</p>
+<pre><code class="nohighlight makeup"><span class="n">config</span><span class="w"> </span><span class="ss">:phoenix</span><span class="p">,</span><span class="w"> </span><span class="ss">:template_engines</span><span class="p">,</span><span class="w">
+  </span><span class="ss">drab</span><span class="p">:</span><span class="w"> </span><span class="nc">Drab.Live.Engine</span></code></pre>
+<h3 id="module-update-behaviours" class="section-heading">
+  <a href="#module-update-behaviours" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Update Behaviours
+</h3>
+
+<p>There are different behaviours of <a href="Drab.Live.html#content"><code class="inline">Drab.Live</code></a>, depends on where the expression with the updated assign lives.
+For example, if the expression defines tag attribute, like <code class="inline">&lt;span class=&quot;&lt;%= @class %&gt;&quot;&gt;</code>, we don’t want to
+re-render the whole tag, as it might override changes you made with other Drab module, or even with Javascript.
+Because of this, Drab finds the tag and updates only the required attributes.</p>
+<h4>Plain Text</h4>
+<p>If the expression in the template is given in any tag body, Drab will replace only the required part of the html.
+Consider the template, with initial value of <code class="inline">1</code> (given in render function in the Controller, as usual):</p>
+<pre><code class="nohighlight makeup"><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="nc">Chapter</span><span class="w"> </span><span class="o">&lt;</span><span class="p">%</span><span class="o">=</span><span class="w"> </span><span class="na">@chapter_no</span><span class="w"> </span><span class="p">%</span><span class="o">&gt;.&lt;/</span><span class="n">p</span><span class="o">&gt;</span></code></pre>
+<p>It renders to:</p>
+<pre><code class="nohighlight makeup"><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="nc">Chapter</span><span class="w"> </span><span class="o">&lt;</span><span class="n">span</span><span class="w"> </span><span class="n">drab</span><span class="o">-</span><span class="n">ampere</span><span class="o">=</span><span class="n">someid</span><span class="o">&gt;</span><span class="mi">1</span><span class="o">&lt;/</span><span class="n">span</span><span class="o">&gt;.&lt;/</span><span class="n">p</span><span class="o">&gt;</span></code></pre>
+<p>This <code class="inline">&lt;span&gt;</code> over the expression is injected automatically by <a href="Drab.Live.EExEngine.html"><code class="inline">Drab.Live.EExEngine</code></a>.
+Updating the <code class="inline">@chapter_no</code> attribute in the Drab Commander, using <a href="#poke/2"><code class="inline">poke/2</code></a>:</p>
+<pre><code class="nohighlight makeup"><span class="n">chapter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">peek</span><span class="p" data-group-id="59">(</span><span class="n">socket</span><span class="p">,</span><span class="w"> </span><span class="ss">:chapter_no</span><span class="p" data-group-id="59">)</span><span class="w">     </span><span class="c1"># get the current value of `@chapter_no`
+</span><span class="n">poke</span><span class="p" data-group-id="83">(</span><span class="n">socket</span><span class="p">,</span><span class="w"> </span><span class="ss">chapter_no</span><span class="p">:</span><span class="w"> </span><span class="n">chapter</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p" data-group-id="83">)</span><span class="w">   </span><span class="c1"># push the new value to the browser</span></code></pre>
+<p>The above will change the <code class="inline">innerHTML</code> of the <code class="inline">&lt;span drab-ampere=someid&gt;</code> to “2”:</p>
+<pre><code class="nohighlight makeup"><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="nc">Chapter</span><span class="w"> </span><span class="o">&lt;</span><span class="n">span</span><span class="w"> </span><span class="n">drab</span><span class="o">-</span><span class="n">ampere</span><span class="o">=</span><span class="n">someid</span><span class="o">&gt;</span><span class="mi">2</span><span class="o">&lt;/</span><span class="n">span</span><span class="o">&gt;.&lt;/</span><span class="n">p</span><span class="o">&gt;</span></code></pre>
+<h4>Attributes</h4>
+<p>When the expression is defining the attribute of the tag, the behaviour if different. Let’s assume there is
+a template with following html, rendered in the Controller with value of <code class="inline">@button</code> set to string <code class="inline">&quot;btn-danger&quot;</code>.</p>
+<pre><code class="nohighlight makeup"><span class="o">&lt;</span><span class="n">button</span><span class="w"> </span><span class="n">class</span><span class="o">=</span><span class="s2">&quot;btn &lt;%= @button %&gt;&quot;</span><span class="o">&gt;</span></code></pre>
+<p>It renders to:</p>
+<pre><code class="nohighlight makeup"><span class="o">&lt;</span><span class="n">button</span><span class="w"> </span><span class="n">drab</span><span class="o">-</span><span class="n">ampere</span><span class="o">=</span><span class="n">someid</span><span class="w"> </span><span class="n">class</span><span class="o">=</span><span class="s2">&quot;btn btn-danger&quot;</span><span class="o">&gt;</span></code></pre>
+<p>Again, you can see injected <code class="inline">drab-ampere</code> attribute. This allows Drab to indicate where to update the attribute.
+Pushing the changes to the browser with:</p>
+<pre><code class="nohighlight makeup"><span class="n">poke</span><span class="w"> </span><span class="n">socket</span><span class="p">,</span><span class="w"> </span><span class="ss">button</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;btn btn-info&quot;</span></code></pre>
+<p>will result with updated <code class="inline">class</code> attribute on the given tag. It is acomplished by rendering and running
+<code class="inline">node.setAttribute(&quot;class&quot;, &quot;btn btn-info&quot;)</code>.</p>
+<p>Notice that the pattern where your expression lives is preserved: you may update only the partials of the
+attribute value string.</p>
+<h4>Properties</h4>
+<p>Nowadays we deal more with node properties than attributes. This is why <a href="Drab.Live.html#content"><code class="inline">Drab.Live</code></a> introduces the special syntax.
+When using the @ sign at the beginning of the attribute name, it will be treated as a property.</p>
+<pre><code class="nohighlight makeup"><span class="o">&lt;</span><span class="n">button</span><span class="w"> </span><span class="na">@hidden</span><span class="o">=&lt;</span><span class="p">%</span><span class="o">=</span><span class="w"> </span><span class="na">@hidden</span><span class="w"> </span><span class="p">%</span><span class="o">&gt;&gt;</span></code></pre>
+<p>Updating <code class="inline">@hidden</code> in the Drab Commander with <a href="#poke/2"><code class="inline">poke/2</code></a> will change the value of the <code class="inline">hidden</code> property
+(without dollar sign!), by sending the update javascript, like <code class="inline">node[&#39;hidden&#39;] = false</code>.</p>
+<p>You may also dig deeper into the Node properties, using dot - like in JavaScript - to bind the expression
+with the specific property. The good example is to set up <code class="inline">.style</code>:</p>
+<pre><code class="nohighlight makeup"><span class="o">&lt;</span><span class="n">button</span><span class="w"> </span><span class="na">@style</span><span class="o">.</span><span class="n">backgroundColor</span><span class="o">=&lt;</span><span class="p">%</span><span class="o">=</span><span class="w"> </span><span class="na">@color</span><span class="w"> </span><span class="p">%</span><span class="o">&gt;&gt;</span></code></pre>
+<p>Additionally, Drab sets up all the properties defined that way when the page loads. Thanks to this, you
+don’t have to worry about the initial value.</p>
+<p>Notice that <code class="inline">@property=&lt;%= expression %&gt;</code> <em>is the only available syntax</em>, you can not use string pattern or
+give more than one expression. Property must be solid bind to the expression.</p>
+<p>The expression binded with the property <em>must be encodable to JSON</em>, so, for example, tuples are not allowed here.
+Please refer to <a href="https://hexdocs.pm/poison/3.1.0/Poison.html"><code class="inline">Poison</code></a> for more information about encoding JS.</p>
+<h4>Scripts</h4>
+<p>When the assign we want to change is inside the <code class="inline">&lt;script&gt;&lt;/script&gt;</code> tag, Drab will re-evaluate the whole
+script after assigment change. Let’s say you don’t want to use <code class="inline">$property=&lt;%=expression%&gt;</code> syntax to define
+the object property. You may want to render the javascript:</p>
+<pre><code class="nohighlight makeup"><span class="o">&lt;</span><span class="n">script</span><span class="o">&gt;</span><span class="w">
+  </span><span class="n">document</span><span class="o">.</span><span class="n">querySelectorAll</span><span class="p" data-group-id="73">(</span><span class="s2">&quot;button&quot;</span><span class="p" data-group-id="73">)</span><span class="o">.</span><span class="n">hidden</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="p">%</span><span class="o">=</span><span class="w"> </span><span class="na">@buttons_state</span><span class="w"> </span><span class="p">%</span><span class="o">&gt;</span><span class="w">
+</span><span class="o">&lt;/</span><span class="n">script</span><span class="o">&gt;</span></code></pre>
+<p>If you render the template in the Controller with <code class="inline">@button_state</code> set to <code class="inline">false</code>, the initial html will look like:</p>
+<pre><code class="nohighlight makeup"><span class="o">&lt;</span><span class="n">script</span><span class="w"> </span><span class="n">drab</span><span class="o">-</span><span class="n">ampere</span><span class="o">=</span><span class="n">someid</span><span class="o">&gt;</span><span class="w">
+  </span><span class="n">document</span><span class="o">.</span><span class="n">querySelectorAll</span><span class="p" data-group-id="81">(</span><span class="s2">&quot;button&quot;</span><span class="p" data-group-id="81">)</span><span class="o">.</span><span class="n">hidden</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">false</span><span class="w">
+</span><span class="o">&lt;/</span><span class="n">script</span><span class="o">&gt;</span></code></pre>
+<p>Again, Drab injects some ID to know where to find its victim. After you <a href="#poke/2"><code class="inline">poke/2</code></a> the new value of <code class="inline">@button_state</code>,
+Drab will re-render the whole script with a new value and will send a request to re-evaluate the script.
+Browser will run something like: <code class="inline">eval(&quot;document.querySelectorAll(&quot;button&quot;).hidden = true&quot;)</code>.</p>
+<h3 id="module-partials" class="section-heading">
+  <a href="#module-partials" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Partials
+</h3>
+
+<p>Function <a href="#poke/2"><code class="inline">poke/2</code></a> and <a href="#peek/2"><code class="inline">peek/2</code></a> works on the default template - the one rendered with the Controller. In case there
+are some child templates, rendered inside the main one, you need to specify the template name as a second argument
+of <a href="#poke/3"><code class="inline">poke/3</code></a> and <a href="#peek/3"><code class="inline">peek/3</code></a> functions.</p>
+<p>In case the template is not under the current (main) view, use <a href="#poke/4"><code class="inline">poke/4</code></a> and <a href="#peek/4"><code class="inline">peek/4</code></a> to specify the external
+view name.</p>
+<p>Assigns are archored within their partials. Manipulation of the assign outside the template it lives will raise
+<a href="https://hexdocs.pm/elixir/ArgumentError.html"><code class="inline">ArgumentError</code></a>. <em>Partials are not hierachical</em>, eg. modifying the assign in the main partial will not update
+assigns in the child partials, even if they exist there.</p>
+<h4>Rendering partial templates in a runtime</h4>
+<p>There is a possibility add the partial to the DOM tree in a runtime, using <code class="inline">render_to_string/2</code> helper:</p>
+<pre><code class="nohighlight makeup"><span class="n">poke</span><span class="w"> </span><span class="n">socket</span><span class="p">,</span><span class="w"> </span><span class="ss">live_partial1</span><span class="p">:</span><span class="w"> </span><span class="n">render_to_string</span><span class="p" data-group-id="79">(</span><span class="s2">&quot;partial1.html&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">color</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#aaaabb&quot;</span><span class="p" data-group-id="79">)</span></code></pre>
+<p>But remember that assigns are assigned to the partials, so after adding it to the page, manipulation
+must be done within the added partial:</p>
+<pre><code class="nohighlight makeup"><span class="n">poke</span><span class="w"> </span><span class="n">socket</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;partial1.html&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">color</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;red&quot;</span></code></pre>
+<h3 id="module-limitions" class="section-heading">
+  <a href="#module-limitions" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Limitions
+</h3>
+
+<p>Because Drab must interpret the template, inject it’s ID etc, it assumes that the template HTML is valid.
+There are also some limits for defining attributes, properties, etc. See <a href="Drab.Live.EExEngine.html"><code class="inline">Drab.Live.EExEngine</code></a> for a full
+description.</p>
+
+        </section>
+      
+
+      
+        <section id="summary" class="details-list">
+          <h1 class="section-heading">
+            <a class="hover-link" href="#summary">
+              <span class="icon-link" aria-hidden="true"></span>
+              <span class="sr-only">Link to this section</span>
+            </a>
+            Summary
+          </h1>
+          
+
+          
+  <div class="summary-functions summary">
+    <h2>
+      <a href="#functions">Functions</a>
+    </h2>
+    <div class="summary-row">
+  <div class="summary-signature">
+    <a href="#peek/2">peek(socket, assign)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Returns the current value of the assign from the current (main) partial</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#peek/3">peek(socket, partial, assign)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Like <a href="#peek/2"><code class="inline">peek/2</code></a>, but takes partial name and returns assign from that specified partial</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#peek/4">peek(socket, view, partial, assign)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Like <a href="#peek/2"><code class="inline">peek/2</code></a>, but takes a view and a partial name and returns assign from that specified view/partial</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#poke/2">poke(socket, assigns)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Updates the current page in the browser with the new assign value</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#poke/3">poke(socket, partial, assigns)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Like <a href="#poke/2"><code class="inline">poke/2</code></a>, but limited only to the given partial name</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#poke/4">poke(socket, view, partial, assigns)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Like <a href="#poke/3"><code class="inline">poke/3</code></a>, but searches for the partial within the given view</p>
+</div>
+  
+</div>
+
+  </div>
+
+
+          
+
+        </section>
+      
+
+      
+
+      
+        <section id="functions" class="details-list">
+          <h1 class="section-heading">
+            <a class="hover-link" href="#functions">
+              <span class="icon-link" aria-hidden="true"></span>
+              <span class="sr-only">Link to this section</span>
+            </a>
+            Functions
+          </h1>
+          <div class="detail" id="peek/2">
+  
+  
+  <div class="detail-header">
+    <a href="#peek/2" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">peek(socket, assign)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Returns the current value of the assign from the current (main) partial.</p>
+<pre><code class="nohighlight makeup"><span class="gp">iex&gt;</span><span class="w"> </span><span class="n">peek</span><span class="p" data-group-id="143">(</span><span class="n">socket</span><span class="p">,</span><span class="w"> </span><span class="ss">:count</span><span class="p" data-group-id="143">)</span><span class="w">
+</span><span class="mi">42</span><span class="w">
+</span><span class="gp">iex&gt;</span><span class="w"> </span><span class="n">peek</span><span class="p" data-group-id="148">(</span><span class="n">socket</span><span class="p">,</span><span class="w"> </span><span class="ss">:nonexistent</span><span class="p" data-group-id="148">)</span><span class="w">
+</span><span class="o">**</span><span class="w"> </span><span class="p" data-group-id="152">(</span><span class="nc">ArgumentError</span><span class="p" data-group-id="152">)</span><span class="w"> </span><span class="nc">Assign</span><span class="w"> </span><span class="na">@nonexistent</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">found</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nc">Drab</span><span class="w"> </span><span class="nc">EEx</span><span class="w"> </span><span class="n">template</span></code></pre>
+<p>Notice that this is a value of the assign, and not the value of any node property or attribute. Assign
+gets its value only while rendering the page or via <code class="inline">poke</code>. After changing the value of node attribute
+or property on the client side, the assign value will remain the same.</p>
+
+  </section>
+</div>
+<div class="detail" id="peek/3">
+  
+  
+  <div class="detail-header">
+    <a href="#peek/3" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">peek(socket, partial, assign)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Like <a href="#peek/2"><code class="inline">peek/2</code></a>, but takes partial name and returns assign from that specified partial.</p>
+<p>Partial is taken from the current view.</p>
+<pre><code class="nohighlight makeup"><span class="gp">iex&gt;</span><span class="w"> </span><span class="n">peek</span><span class="p" data-group-id="167">(</span><span class="n">socket</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;users.html&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">:count</span><span class="p" data-group-id="167">)</span><span class="w">
+</span><span class="mi">42</span></code></pre>
+
+  </section>
+</div>
+<div class="detail" id="peek/4">
+  
+  
+  <div class="detail-header">
+    <a href="#peek/4" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">peek(socket, view, partial, assign)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Like <a href="#peek/2"><code class="inline">peek/2</code></a>, but takes a view and a partial name and returns assign from that specified view/partial.</p>
+<pre><code class="nohighlight makeup"><span class="gp">iex&gt;</span><span class="w"> </span><span class="n">peek</span><span class="p" data-group-id="181">(</span><span class="n">socket</span><span class="p">,</span><span class="w"> </span><span class="nc">MyApp.UserView</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;users.html&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">:count</span><span class="p" data-group-id="181">)</span><span class="w">
+</span><span class="mi">42</span></code></pre>
+
+  </section>
+</div>
+<div class="detail" id="poke/2">
+  
+  
+  <div class="detail-header">
+    <a href="#poke/2" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">poke(socket, assigns)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Updates the current page in the browser with the new assign value.</p>
+<p>Raises <a href="https://hexdocs.pm/elixir/ArgumentError.html"><code class="inline">ArgumentError</code></a> when assign is not found within the partial.
+Returns untouched socket.</p>
+<pre><code class="nohighlight makeup"><span class="gp">iex&gt;</span><span class="w"> </span><span class="n">poke</span><span class="p" data-group-id="192">(</span><span class="n">socket</span><span class="p">,</span><span class="w"> </span><span class="ss">count</span><span class="p">:</span><span class="w"> </span><span class="mi">42</span><span class="p" data-group-id="192">)</span><span class="w">
+</span><span class="p">%</span><span class="nc">Phoenix.Socket</span><span class="err">{</span><span class="w"> </span><span class="o">...</span></code></pre>
+
+  </section>
+</div>
+<div class="detail" id="poke/3">
+  
+  
+  <div class="detail-header">
+    <a href="#poke/3" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">poke(socket, partial, assigns)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Like <a href="#poke/2"><code class="inline">poke/2</code></a>, but limited only to the given partial name.</p>
+<pre><code class="nohighlight makeup"><span class="gp">iex&gt;</span><span class="w"> </span><span class="n">poke</span><span class="p" data-group-id="204">(</span><span class="n">socket</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;user.html&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">name</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Bożywój&quot;</span><span class="p" data-group-id="204">)</span><span class="w">
+</span><span class="p">%</span><span class="nc">Phoenix.Socket</span><span class="err">{</span><span class="w"> </span><span class="o">...</span></code></pre>
+
+  </section>
+</div>
+<div class="detail" id="poke/4">
+  
+  
+  <div class="detail-header">
+    <a href="#poke/4" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">poke(socket, view, partial, assigns)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Like <a href="#poke/3"><code class="inline">poke/3</code></a>, but searches for the partial within the given view.</p>
+<pre><code class="nohighlight makeup"><span class="gp">iex&gt;</span><span class="w"> </span><span class="n">poke</span><span class="p" data-group-id="210">(</span><span class="n">socket</span><span class="p">,</span><span class="w"> </span><span class="nc">MyApp.UserView</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;user.html&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">name</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Bożywój&quot;</span><span class="p" data-group-id="210">)</span><span class="w">
+</span><span class="p">%</span><span class="nc">Phoenix.Socket</span><span class="err">{</span><span class="w"> </span><span class="o">...</span></code></pre>
+
+  </section>
+</div>
+
+        </section>
+      
+
+      
+          <footer class="footer">
+        <p>
+          <span class="line">
+            Built using
+            <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" rel="help" target="_blank">ExDoc</a> (v0.17.1),
+          </span>
+          <span class="line">
+            designed by
+            <a href="https://twitter.com/dignifiedquire" target="_blank" title="@dignifiedquire">Friedel Ziegelmayer</a>.
+            </span>
+        </p>
+        <button class="night-mode-toggle"><span class="sr-only">Switch theme</span></button>
+      </footer>
+    </div>
+  </div>
+</section>
+</div>
+  <script src="dist/app-4cfb39be16.js"></script>
+  <script src="assets/makedown.js"></script>
+  </body>
+</html>
+

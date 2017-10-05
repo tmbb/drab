@@ -1,0 +1,516 @@
+    <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="ExDoc v0.17.1">
+    <title>Drab.Commander – drab v0.5.6</title>
+    <link rel="stylesheet" href="dist/app-110d9134a6.css" />
+    
+    
+      
+        <link rel="icon" type="image/png" href="assets/logo.png" />
+      
+      
+    
+    <script src="dist/sidebar_items-6fa2c1b3f2.js"></script>
+    <link rel="stylesheet" href="assets/makedown.css"/>
+  </head>
+  <body data-type="modules">
+    <script>try { if(localStorage.getItem('night-mode')) document.body.className += ' night-mode'; } catch (e) { }</script>
+
+    <div class="main">
+<button class="sidebar-toggle">
+  <span class="icon-menu" aria-hidden="true"></span>
+  <span class="sr-only">Toggle Sidebar</span>
+</button>
+<section class="sidebar">
+
+  
+  <a href="Drab.html" class="sidebar-projectLink">
+    <div class="sidebar-projectDetails">
+      <h1 class="sidebar-projectName">
+        drab
+      </h1>
+      <h2 class="sidebar-projectVersion">
+        v0.5.6
+      </h2>
+    </div>
+    
+      <img src="assets/logo.png" alt="drab" class="sidebar-projectImage">
+    
+  </a>
+
+  <form class="sidebar-search" action="search.html">
+    <button type="submit" class="search-button">
+      <span class="icon-search" aria-hidden="true"></span>
+    </button>
+    <input name="q" type="text" id="search-list" class="search-input" placeholder="search" aria-label="Search" autocomplete="off" />
+  </form>
+
+  <ul class="sidebar-listNav">
+    <li><a id="extras-list" href="#full-list">Pages</a></li>
+
+    
+      <li><a id="modules-list" href="#full-list">Modules</a></li>
+    
+
+    
+      <li><a id="exceptions-list" href="#full-list">Exceptions</a></li>
+    
+
+    
+      <li><a id="tasks-list" href="#full-list">Mix Tasks</a></li>
+    
+  </ul>
+  <div class="gradient"></div>
+  <ul id="full-list" class="sidebar-fullList"></ul>
+</section>
+
+<section class="content">
+  <div class="content-outer">
+    <div id="content" class="content-inner">
+
+
+      <h1>
+        <small class="visible-xs">drab v0.5.6</small>
+        Drab.Commander
+        
+      </h1>
+
+      
+        <section id="moduledoc">
+          <p>Drab Commander is a module to keep event handlers.</p>
+<p>All the Drab functions (callbacks, event handlers) are placed in the module called <code class="inline">Commander</code>. Think about
+it as a controller for the live pages. Commanders should be placed in <code class="inline">web/commanders</code> directory. Commander must
+have a corresponding controller.</p>
+<pre><code class="nohighlight makeup"><span class="kd">defmodule</span><span class="w"> </span><span class="nc">DrabExample.PageCommander</span><span class="w"> </span><span class="k" data-group-id="80">do</span><span class="w">
+  </span><span class="kn">use</span><span class="w"> </span><span class="nc">Drab.Commander</span><span class="w">
+
+  </span><span class="kd">def</span><span class="w"> </span><span class="nf">click_button_handler</span><span class="p" data-group-id="61">(</span><span class="n">socket</span><span class="p">,</span><span class="w"> </span><span class="n">dom_sender</span><span class="p" data-group-id="61">)</span><span class="w"> </span><span class="k" data-group-id="77">do</span><span class="w">
+    </span><span class="o">...</span><span class="w">
+  </span><span class="k" data-group-id="77">end</span><span class="w">
+</span><span class="k" data-group-id="80">end</span></code></pre>
+<p>Remember the difference: <code class="inline">controller</code> renders the page while <code class="inline">commander</code> works on the live page.</p>
+<h2 id="module-event-handler-functions" class="section-heading">
+  <a href="#module-event-handler-functions" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Event handler functions
+</h2>
+
+<p>Event handler is the function which process on request which comes from the browser. Most basically it is
+done by running JS method <code class="inline">Drab.run_handler()</code>. See <a href="Drab.Core.html"><code class="inline">Drab.Core</code></a> for this method description.</p>
+<p>The event handler function receives two parameters:</p>
+<ul>
+<li><code class="inline">socket</code> - the websocket used to communicate back to the page
+</li>
+<li><code class="inline">argument</code> - an argument used in JS Drab.run_handler() method; when lauching an event via
+  <code class="inline">drab-handler=function</code> atrribute, it is a map describing the sender object
+</li>
+</ul>
+<h2 id="module-callbacks" class="section-heading">
+  <a href="#module-callbacks" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Callbacks
+</h2>
+
+<p>Callbacks are an automatic events which are launched by the system. They are defined by the macro in the
+Commander module:</p>
+<pre><code class="nohighlight makeup"><span class="kd">defmodule</span><span class="w"> </span><span class="nc">DrabExample.PageCommander</span><span class="w"> </span><span class="k" data-group-id="155">do</span><span class="w">
+  </span><span class="kn">use</span><span class="w"> </span><span class="nc">Drab.Commander</span><span class="w">
+
+  </span><span class="n">onload</span><span class="w"> </span><span class="ss">:page_loaded</span><span class="w">
+  </span><span class="n">onconnect</span><span class="w"> </span><span class="ss">:connected</span><span class="w">
+  </span><span class="n">ondisconnect</span><span class="w"> </span><span class="ss">:dosconnected</span><span class="w">
+
+  </span><span class="n">before_handler</span><span class="w"> </span><span class="ss">:check_status</span><span class="w">
+  </span><span class="n">after_handler</span><span class="w">  </span><span class="ss">:clean_up</span><span class="p">,</span><span class="w"> </span><span class="ss">only</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="69">[</span><span class="ss">:perform_long_process</span><span class="p" data-group-id="69">]</span><span class="w">
+
+  </span><span class="kd">def</span><span class="w"> </span><span class="nf">page_loaded</span><span class="p" data-group-id="75">(</span><span class="n">socket</span><span class="p" data-group-id="75">)</span><span class="w"> </span><span class="k" data-group-id="86">do</span><span class="w">
+    </span><span class="o">...</span><span class="w">
+  </span><span class="k" data-group-id="86">end</span><span class="w">
+
+  </span><span class="kd">def</span><span class="w"> </span><span class="nf">connected</span><span class="p" data-group-id="91">(</span><span class="n">socket</span><span class="p" data-group-id="91">)</span><span class="w"> </span><span class="k" data-group-id="102">do</span><span class="w">
+    </span><span class="o">...</span><span class="w">
+  </span><span class="k" data-group-id="102">end</span><span class="w">
+
+  </span><span class="kd">def</span><span class="w"> </span><span class="nf">connected</span><span class="p" data-group-id="110">(</span><span class="n">store</span><span class="p">,</span><span class="w"> </span><span class="n">session</span><span class="p" data-group-id="110">)</span><span class="w"> </span><span class="k" data-group-id="131">do</span><span class="w">
+    </span><span class="c1"># notice that this callback receives store and session, not socket
+</span><span class="w">    </span><span class="c1"># this is because socket is not available anymore (Channel is closed)
+</span><span class="w">    </span><span class="o">...</span><span class="w">
+  </span><span class="k" data-group-id="131">end</span><span class="w">
+
+  </span><span class="kd">def</span><span class="w"> </span><span class="nf">check_status</span><span class="p" data-group-id="140">(</span><span class="n">socket</span><span class="p">,</span><span class="w"> </span><span class="n">dom_sender</span><span class="p" data-group-id="140">)</span><span class="w"> </span><span class="k" data-group-id="146">do</span><span class="w">
+    </span><span class="c1"># return false or nil to prevent event handler to be launched
+</span><span class="w">  </span><span class="k" data-group-id="146">end</span><span class="w">
+
+  </span><span class="kd">def</span><span class="w"> </span><span class="nf">clean_up</span><span class="p" data-group-id="149">(</span><span class="n">socket</span><span class="p">,</span><span class="w"> </span><span class="n">dom_sender</span><span class="p">,</span><span class="w"> </span><span class="n">handler_return_value</span><span class="p" data-group-id="149">)</span><span class="w"> </span><span class="k" data-group-id="153">do</span><span class="w">
+    </span><span class="c1"># this callback gets return value of the corresponding event handler
+</span><span class="w">  </span><span class="k" data-group-id="153">end</span><span class="w">
+</span><span class="k" data-group-id="155">end</span></code></pre>
+<h4><code class="inline">onconnect</code></h4>
+<p>Launched every time client browser connects to the server, including reconnects after server
+crash, network broken etc</p>
+<h4><code class="inline">onload</code></h4>
+<p>Launched only once after page loaded and connects to the server - exactly the same like <code class="inline">onconnect</code>,
+but launches only once, not after every reconnect</p>
+<h4><code class="inline">ondisconnect</code></h4>
+<p>Launched every time client browser disconnects from the server, it may be a network disconnect,
+closing the browser, navigate back. Disconnect callback receives Drab Store as an argument</p>
+<h4><code class="inline">before_handler</code></h4>
+<p>Runs before the event handler. If any of before callbacks return <code class="inline">false</code> or <code class="inline">nil</code>, corresponding event
+will not be launched. If there are more callbacks for specified event handler function, all are processed
+in order or appearance, then system checks if any of them returned false</p>
+<p>Can be filtered by <code class="inline">:only</code> or <code class="inline">:except</code> options:</p>
+<pre><code class="nohighlight makeup"><span class="n">before_handler</span><span class="w"> </span><span class="ss">:check_status</span><span class="p">,</span><span class="w"> </span><span class="ss">except</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="58">[</span><span class="ss">:set_status</span><span class="p" data-group-id="58">]</span><span class="w">
+</span><span class="n">before_handler</span><span class="w"> </span><span class="ss">:check_status</span><span class="p">,</span><span class="w"> </span><span class="ss">only</span><span class="p">:</span><span class="w">   </span><span class="p" data-group-id="72">[</span><span class="ss">:update_db</span><span class="p" data-group-id="72">]</span></code></pre>
+<h4><code class="inline">after_handler</code></h4>
+<p>Runs after the event handler. Gets return value of the event handler function as a third argument.
+Can be filtered by <code class="inline">:only</code> or <code class="inline">:except</code> options, analogically to <code class="inline">before_handler</code></p>
+<h2 id="module-broadcasting-options" class="section-heading">
+  <a href="#module-broadcasting-options" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Broadcasting options
+</h2>
+
+<p>All Drab function may be broadcaster. By default, broadcasts are sent to browsers sharing the same page
+(the same url), but it could be override by <a href="#broadcasting/1"><code class="inline">broadcasting/1</code></a> macro.</p>
+<h2 id="module-modules" class="section-heading">
+  <a href="#module-modules" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Modules
+</h2>
+
+<p>Drab is modular. You my choose which modules to use in the specific Commander by using <code class="inline">:module</code> option
+in <code class="inline">use Drab.Commander</code> directive.
+There is one required module, which is loaded always and can’t be disabled: <code class="inline">Drab.Code</code>. By default, modules
+<a href="Drab.Live.html"><code class="inline">Drab.Live</code></a> and <a href="Drab.Element.html"><code class="inline">Drab.Element</code></a> are loaded. The following code:</p>
+<pre><code class="nohighlight makeup"><span class="kn">use</span><span class="w"> </span><span class="nc">Drab.Commander</span><span class="p">,</span><span class="w"> </span><span class="ss">modules</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="62">[</span><span class="nc">Drab.Query</span><span class="p" data-group-id="62">]</span></code></pre>
+<p>will override default modules, so only <a href="Drab.Core.html"><code class="inline">Drab.Core</code></a> and <a href="Drab.Query.html"><code class="inline">Drab.Query</code></a> will be available.</p>
+<p>Every module has its corresponding JS template, which is loaded only when module is enabled.</p>
+<h2 id="module-using-templates" class="section-heading">
+  <a href="#module-using-templates" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Using templates
+</h2>
+
+<p>Drab injects function <code class="inline">render_to_string/2</code> into your Commander. It is a shorthand for
+<a href="https://hexdocs.pm/phoenix/1.3.0/Phoenix.View.html#render_to_string/3"><code class="inline">Phoenix.View.render_to_string/3</code></a> - Drab automatically chooses the current View.</p>
+<h3 id="module-examples" class="section-heading">
+  <a href="#module-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples:
+</h3>
+
+<pre><code class="nohighlight makeup"><span class="n">buttons</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">render_to_string</span><span class="p" data-group-id="67">(</span><span class="s2">&quot;waiter_example.html&quot;</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="66">[]</span><span class="p" data-group-id="67">)</span></code></pre>
+<h2 id="module-generate-the-commander" class="section-heading">
+  <a href="#module-generate-the-commander" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Generate the Commander
+</h2>
+
+<p>There is a mix task (<a href="Mix.Tasks.Drab.Gen.Commander.html"><code class="inline">Mix.Tasks.Drab.Gen.Commander</code></a>) to generate skeleton of commander:</p>
+<pre><code class="nohighlight makeup"><span class="n">mix</span><span class="w"> </span><span class="n">drab</span><span class="o">.</span><span class="n">gen</span><span class="o">.</span><span class="n">commander</span><span class="w"> </span><span class="nc">Name</span></code></pre>
+<p>See also <a href="Drab.Controller.html"><code class="inline">Drab.Controller</code></a></p>
+
+        </section>
+      
+
+      
+        <section id="summary" class="details-list">
+          <h1 class="section-heading">
+            <a class="hover-link" href="#summary">
+              <span class="icon-link" aria-hidden="true"></span>
+              <span class="sr-only">Link to this section</span>
+            </a>
+            Summary
+          </h1>
+          
+
+          
+  <div class="summary-functions summary">
+    <h2>
+      <a href="#functions">Functions</a>
+    </h2>
+    <div class="summary-row">
+  <div class="summary-signature">
+    <a href="#access_session/1">access_session(session_keys)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Drab may allow an access to specified Plug Session values. For this, you must whitelist the keys of the
+session map. Only this keys will be available to <a href="Drab.Core.html#get_session/2"><code class="inline">Drab.Core.get_session/2</code></a></p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#after_handler/2">after_handler(event_handler, filter \\ [])</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Sets up the callback for after_handler. Receives handler function name as an atom and options</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#before_handler/2">before_handler(event_handler, filter \\ [])</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Sets up the callback for before_handler. Receives handler function name as an atom and options</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#broadcasting/1">broadcasting(subject)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Set up broadcasting listen subject for the current commander</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#onconnect/1">onconnect(event_handler)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Sets up the callback for onconnect. Receives handler function name as an atom</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#ondisconnect/1">ondisconnect(event_handler)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Sets up the callback for ondisconnect. Receives handler function name as an atom</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#onload/1">onload(event_handler)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Sets up the callback for onload. Receives handler function name as an atom</p>
+</div>
+  
+</div>
+
+  </div>
+
+
+          
+
+        </section>
+      
+
+      
+
+      
+        <section id="functions" class="details-list">
+          <h1 class="section-heading">
+            <a class="hover-link" href="#functions">
+              <span class="icon-link" aria-hidden="true"></span>
+              <span class="sr-only">Link to this section</span>
+            </a>
+            Functions
+          </h1>
+          <div class="detail" id="access_session/1">
+  
+  
+  <div class="detail-header">
+    <a href="#access_session/1" class="detail-link" title="Link to this macro">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this macro</span>
+    </a>
+    <span class="signature">access_session(session_keys)</span>
+    
+    
+      <span class="note">(macro)</span>
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Drab may allow an access to specified Plug Session values. For this, you must whitelist the keys of the
+session map. Only this keys will be available to <a href="Drab.Core.html#get_session/2"><code class="inline">Drab.Core.get_session/2</code></a></p>
+<pre><code class="nohighlight makeup"><span class="kd">defmodule</span><span class="w"> </span><span class="nc">MyApp.MyCommander</span><span class="w"> </span><span class="k" data-group-id="175">do</span><span class="w">
+  </span><span class="n">user</span><span class="w"> </span><span class="nc">Drab.Commander</span><span class="w">
+
+  </span><span class="n">access_session</span><span class="w"> </span><span class="p" data-group-id="174">[</span><span class="ss">:user_id</span><span class="p">,</span><span class="w"> </span><span class="ss">:counter</span><span class="p" data-group-id="174">]</span><span class="w">
+</span><span class="k" data-group-id="175">end</span></code></pre>
+<p>Keys are whitelisted due to security reasons. Session token is stored on the client-side and it is signed, but
+not encrypted.</p>
+
+  </section>
+</div>
+<div class="detail" id="after_handler/2">
+  
+  
+    <span id="after_handler/1"></span>
+  
+  <div class="detail-header">
+    <a href="#after_handler/2" class="detail-link" title="Link to this macro">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this macro</span>
+    </a>
+    <span class="signature">after_handler(event_handler, filter \\ [])</span>
+    
+    
+      <span class="note">(macro)</span>
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Sets up the callback for after_handler. Receives handler function name as an atom and options.</p>
+<pre><code class="nohighlight makeup"><span class="n">after_handler</span><span class="w"> </span><span class="ss">:event_handler_function</span></code></pre>
+<p>See <a href="Drab.Commander.html#content"><code class="inline">Drab.Commander</code></a> summary for details.</p>
+
+  </section>
+</div>
+<div class="detail" id="before_handler/2">
+  
+  
+    <span id="before_handler/1"></span>
+  
+  <div class="detail-header">
+    <a href="#before_handler/2" class="detail-link" title="Link to this macro">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this macro</span>
+    </a>
+    <span class="signature">before_handler(event_handler, filter \\ [])</span>
+    
+    
+      <span class="note">(macro)</span>
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Sets up the callback for before_handler. Receives handler function name as an atom and options.</p>
+<pre><code class="nohighlight makeup"><span class="n">before_handler</span><span class="w"> </span><span class="ss">:event_handler_function</span></code></pre>
+<p>See <a href="Drab.Commander.html#content"><code class="inline">Drab.Commander</code></a> summary for details.</p>
+
+  </section>
+</div>
+<div class="detail" id="broadcasting/1">
+  
+  
+  <div class="detail-header">
+    <a href="#broadcasting/1" class="detail-link" title="Link to this macro">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this macro</span>
+    </a>
+    <span class="signature">broadcasting(subject)</span>
+    
+    
+      <span class="note">(macro)</span>
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Set up broadcasting listen subject for the current commander.</p>
+<p>It is used by broadcasting functions, like <a href="Drab.Element.html#broadcast_prop/3"><code class="inline">Drab.Element.broadcast_prop/3</code></a> or <a href="Drab.Query.html#insert!/2"><code class="inline">Drab.Query.insert!/2</code></a>.
+When the browser connects to Drab page, it gets the broadcasting subject from the commander. Then,
+it will receive all the broadcasts coming to this subject.</p>
+<p>Default is <code class="inline">:same_path</code></p>
+<p>Options:</p>
+<ul>
+<li><code class="inline">:same_path</code> (default) - broadcasts will go to the browsers rendering the same url
+</li>
+<li><code class="inline">:same_controller</code> - broadcasted message will be received by all browsers, which renders the page generated
+  by the same controller
+</li>
+<li><code class="inline">&quot;topic&quot;</code> - any topic you want to set, messages will go to the clients sharing this topic
+</li>
+</ul>
+<p>See <a href="Drab.Core.html#broadcast_js/2"><code class="inline">Drab.Core.broadcast_js/2</code></a> for more.</p>
+
+  </section>
+</div>
+<div class="detail" id="onconnect/1">
+  
+  
+  <div class="detail-header">
+    <a href="#onconnect/1" class="detail-link" title="Link to this macro">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this macro</span>
+    </a>
+    <span class="signature">onconnect(event_handler)</span>
+    
+    
+      <span class="note">(macro)</span>
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Sets up the callback for onconnect. Receives handler function name as an atom.</p>
+<pre><code class="nohighlight makeup"><span class="n">onconnect</span><span class="w"> </span><span class="ss">:event_handler_function</span></code></pre>
+<p>See <a href="Drab.Commander.html#content"><code class="inline">Drab.Commander</code></a> summary for details.</p>
+
+  </section>
+</div>
+<div class="detail" id="ondisconnect/1">
+  
+  
+  <div class="detail-header">
+    <a href="#ondisconnect/1" class="detail-link" title="Link to this macro">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this macro</span>
+    </a>
+    <span class="signature">ondisconnect(event_handler)</span>
+    
+    
+      <span class="note">(macro)</span>
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Sets up the callback for ondisconnect. Receives handler function name as an atom.</p>
+<pre><code class="nohighlight makeup"><span class="n">ondisconnect</span><span class="w"> </span><span class="ss">:event_handler_function</span></code></pre>
+<p>See <a href="Drab.Commander.html#content"><code class="inline">Drab.Commander</code></a> summary for details.</p>
+
+  </section>
+</div>
+<div class="detail" id="onload/1">
+  
+  
+  <div class="detail-header">
+    <a href="#onload/1" class="detail-link" title="Link to this macro">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this macro</span>
+    </a>
+    <span class="signature">onload(event_handler)</span>
+    
+    
+      <span class="note">(macro)</span>
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Sets up the callback for onload. Receives handler function name as an atom.</p>
+<pre><code class="nohighlight makeup"><span class="n">onload</span><span class="w"> </span><span class="ss">:event_handler_function</span></code></pre>
+<p>See <a href="Drab.Commander.html#content"><code class="inline">Drab.Commander</code></a> summary for details.</p>
+
+  </section>
+</div>
+
+        </section>
+      
+
+      
+          <footer class="footer">
+        <p>
+          <span class="line">
+            Built using
+            <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" rel="help" target="_blank">ExDoc</a> (v0.17.1),
+          </span>
+          <span class="line">
+            designed by
+            <a href="https://twitter.com/dignifiedquire" target="_blank" title="@dignifiedquire">Friedel Ziegelmayer</a>.
+            </span>
+        </p>
+        <button class="night-mode-toggle"><span class="sr-only">Switch theme</span></button>
+      </footer>
+    </div>
+  </div>
+</section>
+</div>
+  <script src="dist/app-4cfb39be16.js"></script>
+  <script src="assets/makedown.js"></script>
+  </body>
+</html>
+

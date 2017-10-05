@@ -1,0 +1,247 @@
+    <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="ExDoc v0.17.1">
+    <title>Drab.Live.EExEngine – drab v0.5.6</title>
+    <link rel="stylesheet" href="dist/app-110d9134a6.css" />
+    
+    
+      
+        <link rel="icon" type="image/png" href="assets/logo.png" />
+      
+      
+    
+    <script src="dist/sidebar_items-6fa2c1b3f2.js"></script>
+    <link rel="stylesheet" href="assets/makedown.css"/>
+  </head>
+  <body data-type="modules">
+    <script>try { if(localStorage.getItem('night-mode')) document.body.className += ' night-mode'; } catch (e) { }</script>
+
+    <div class="main">
+<button class="sidebar-toggle">
+  <span class="icon-menu" aria-hidden="true"></span>
+  <span class="sr-only">Toggle Sidebar</span>
+</button>
+<section class="sidebar">
+
+  
+  <a href="Drab.html" class="sidebar-projectLink">
+    <div class="sidebar-projectDetails">
+      <h1 class="sidebar-projectName">
+        drab
+      </h1>
+      <h2 class="sidebar-projectVersion">
+        v0.5.6
+      </h2>
+    </div>
+    
+      <img src="assets/logo.png" alt="drab" class="sidebar-projectImage">
+    
+  </a>
+
+  <form class="sidebar-search" action="search.html">
+    <button type="submit" class="search-button">
+      <span class="icon-search" aria-hidden="true"></span>
+    </button>
+    <input name="q" type="text" id="search-list" class="search-input" placeholder="search" aria-label="Search" autocomplete="off" />
+  </form>
+
+  <ul class="sidebar-listNav">
+    <li><a id="extras-list" href="#full-list">Pages</a></li>
+
+    
+      <li><a id="modules-list" href="#full-list">Modules</a></li>
+    
+
+    
+      <li><a id="exceptions-list" href="#full-list">Exceptions</a></li>
+    
+
+    
+      <li><a id="tasks-list" href="#full-list">Mix Tasks</a></li>
+    
+  </ul>
+  <div class="gradient"></div>
+  <ul id="full-list" class="sidebar-fullList"></ul>
+</section>
+
+<section class="content">
+  <div class="content-outer">
+    <div id="content" class="content-inner">
+
+
+      <h1>
+        <small class="visible-xs">drab v0.5.6</small>
+        Drab.Live.EExEngine
+        
+      </h1>
+
+      
+        <section id="moduledoc">
+          <p>This is an implementation of EEx.Engine that injects <a href="Drab.Live.html"><code class="inline">Drab.Live</code></a> behaviour.</p>
+<p>It parses the template during compile-time and inject Drab markers into it. Because of this, template must be
+a proper HTML. Also, there are some rules to obey, see limitations below.</p>
+<h3 id="module-limitations" class="section-heading">
+  <a href="#module-limitations" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Limitations
+</h3>
+
+<h4>Avalibility of assigns</h4>
+<p>To make the assign avaliable within Drab, it must show up in the template with “<code class="inline">@assign</code>” format. Passing it
+to <code class="inline">render</code> in the controller is not enough.</p>
+<h4>Attributes</h4>
+<p>The attribute must be well defined, and you can’t use the expression as an attribute name.</p>
+<p>The following is valid:</p>
+<pre><code class="nohighlight makeup"><span class="o">&lt;</span><span class="n">button</span><span class="w"> </span><span class="n">class</span><span class="o">=</span><span class="s2">&quot;btn &lt;%= @button_class %&gt;&quot;</span><span class="o">&gt;</span><span class="w">
+</span><span class="o">&lt;</span><span class="n">a</span><span class="w"> </span><span class="n">href</span><span class="o">=</span><span class="s2">&quot;&lt;%= build_href(@site) %&gt;&quot;</span><span class="o">&gt;</span></code></pre>
+<p>But following constructs are prohibited:</p>
+<pre><code class="nohighlight makeup"><span class="o">&lt;</span><span class="n">tag</span><span class="w"> </span><span class="o">&lt;</span><span class="p">%</span><span class="o">=</span><span class="s2">&quot;attr=&apos;&quot;</span><span class="w"> </span><span class="o">&lt;&gt;</span><span class="w"> </span><span class="na">@value</span><span class="w"> </span><span class="o">&lt;&gt;</span><span class="w"> </span><span class="s2">&quot;&apos;&quot;</span><span class="p">%</span><span class="o">&gt;&gt;</span><span class="w">
+</span><span class="o">&lt;</span><span class="n">tag</span><span class="w"> </span><span class="o">&lt;</span><span class="p">%</span><span class="o">=</span><span class="n">build_attr</span><span class="p" data-group-id="87">(</span><span class="na">@name</span><span class="p">,</span><span class="w"> </span><span class="na">@value</span><span class="p" data-group-id="87">)</span><span class="p">%</span><span class="o">&gt;&gt;</span></code></pre>
+<p>The above will compile (with warnings), but it will not be correctly updated with <code class="inline">Drab.Live.poke</code>.</p>
+<p>The tag name can not be build with the expression.</p>
+<pre><code class="nohighlight makeup"><span class="o">&lt;&lt;</span><span class="p">%</span><span class="o">=</span><span class="w"> </span><span class="na">@tag_name</span><span class="w"> </span><span class="p">%</span><span class="o">&gt;</span><span class="w"> </span><span class="n">attr</span><span class="o">=</span><span class="n">value</span><span class="w"> </span><span class="gp">...&gt;</span></code></pre>
+<p>Nested expressions are not valid in the attribute pattern. The following is not allowed:</p>
+<pre><code class="nohighlight makeup"><span class="o">&lt;</span><span class="n">tag</span><span class="w"> </span><span class="n">attribute</span><span class="o">=</span><span class="s2">&quot;&lt;%= if clause do %&gt;&lt;%= expression %&gt;&lt;% end %&gt;&quot;</span><span class="o">&gt;</span></code></pre>
+<p>Do a flat expression instead:</p>
+<pre><code class="nohighlight makeup"><span class="o">&lt;</span><span class="n">tag</span><span class="w"> </span><span class="n">attribute</span><span class="o">=</span><span class="s2">&quot;&lt;%= if clause, do: expression %&gt;&quot;</span><span class="o">&gt;</span></code></pre>
+<h4>Scripts</h4>
+<p>Tag name must be defined in the template as <code class="inline">&lt;script&gt;</code>, and can’t be defined with the expression.</p>
+<p>Nested expressions are not valid in the script pattern. The following is not allowed:</p>
+<pre><code class="nohighlight makeup"><span class="o">&lt;</span><span class="n">script</span><span class="o">&gt;</span><span class="w">
+  </span><span class="o">&lt;</span><span class="p">%</span><span class="o">=</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">clause</span><span class="w"> </span><span class="k" data-group-id="78">do</span><span class="w"> </span><span class="p">%</span><span class="o">&gt;</span><span class="w">
+    </span><span class="o">&lt;</span><span class="p">%</span><span class="o">=</span><span class="w"> </span><span class="n">expression</span><span class="w"> </span><span class="p">%</span><span class="o">&gt;</span><span class="w">
+  </span><span class="o">&lt;</span><span class="p">%</span><span class="w"> </span><span class="k" data-group-id="78">end</span><span class="w"> </span><span class="p">%</span><span class="o">&gt;&gt;</span><span class="w">
+</span><span class="o">&lt;/</span><span class="n">script</span><span class="o">&gt;</span></code></pre>
+<p>Do a flat expression instead:</p>
+<pre><code class="nohighlight makeup"><span class="o">&lt;</span><span class="n">script</span><span class="o">&gt;</span><span class="w">
+  </span><span class="o">&lt;</span><span class="p">%</span><span class="o">=</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">clause</span><span class="p">,</span><span class="w"> </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="n">expression</span><span class="w"> </span><span class="p">%</span><span class="o">&gt;</span><span class="w">
+</span><span class="o">&lt;/</span><span class="n">script</span><span class="o">&gt;</span></code></pre>
+<h4>Textareas</h4>
+<p>As above, you can not use nested expressions inside the textarea tag.</p>
+<h4>Properties</h4>
+<p>Property must be defined inside the tag, using strict <code class="inline">@property.path.from.node=&lt;%= expression %&gt;</code> syntax.
+One property may be bound only to the one assign.</p>
+
+        </section>
+      
+
+      
+        <section id="summary" class="details-list">
+          <h1 class="section-heading">
+            <a class="hover-link" href="#summary">
+              <span class="icon-link" aria-hidden="true"></span>
+              <span class="sr-only">Link to this section</span>
+            </a>
+            Summary
+          </h1>
+          
+
+          
+  <div class="summary-functions summary">
+    <h2>
+      <a href="#functions">Functions</a>
+    </h2>
+    <div class="summary-row">
+  <div class="summary-signature">
+    <a href="#handle_begin/1">handle_begin(quoted)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Callback implementation for <a href="https://hexdocs.pm/eex/EEx.Engine.html#c:handle_begin/1"><code class="inline">EEx.Engine.handle_begin/1</code></a></p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#handle_end/1">handle_end(quoted)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Callback implementation for <a href="https://hexdocs.pm/eex/EEx.Engine.html#c:handle_end/1"><code class="inline">EEx.Engine.handle_end/1</code></a></p>
+</div>
+  
+</div>
+
+  </div>
+
+
+          
+
+        </section>
+      
+
+      
+
+      
+        <section id="functions" class="details-list">
+          <h1 class="section-heading">
+            <a class="hover-link" href="#functions">
+              <span class="icon-link" aria-hidden="true"></span>
+              <span class="sr-only">Link to this section</span>
+            </a>
+            Functions
+          </h1>
+          <div class="detail" id="handle_begin/1">
+  
+  
+  <div class="detail-header">
+    <a href="#handle_begin/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">handle_begin(quoted)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Callback implementation for <a href="https://hexdocs.pm/eex/EEx.Engine.html#c:handle_begin/1"><code class="inline">EEx.Engine.handle_begin/1</code></a>.</p>
+
+  </section>
+</div>
+<div class="detail" id="handle_end/1">
+  
+  
+  <div class="detail-header">
+    <a href="#handle_end/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">handle_end(quoted)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Callback implementation for <a href="https://hexdocs.pm/eex/EEx.Engine.html#c:handle_end/1"><code class="inline">EEx.Engine.handle_end/1</code></a>.</p>
+
+  </section>
+</div>
+
+        </section>
+      
+
+      
+          <footer class="footer">
+        <p>
+          <span class="line">
+            Built using
+            <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" rel="help" target="_blank">ExDoc</a> (v0.17.1),
+          </span>
+          <span class="line">
+            designed by
+            <a href="https://twitter.com/dignifiedquire" target="_blank" title="@dignifiedquire">Friedel Ziegelmayer</a>.
+            </span>
+        </p>
+        <button class="night-mode-toggle"><span class="sr-only">Switch theme</span></button>
+      </footer>
+    </div>
+  </div>
+</section>
+</div>
+  <script src="dist/app-4cfb39be16.js"></script>
+  <script src="assets/makedown.js"></script>
+  </body>
+</html>
+

@@ -1,0 +1,800 @@
+    <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="ExDoc v0.17.1">
+    <title>Drab.Element – drab v0.5.6</title>
+    <link rel="stylesheet" href="dist/app-110d9134a6.css" />
+    
+    
+      
+        <link rel="icon" type="image/png" href="assets/logo.png" />
+      
+      
+    
+    <script src="dist/sidebar_items-6fa2c1b3f2.js"></script>
+    <link rel="stylesheet" href="assets/makedown.css"/>
+  </head>
+  <body data-type="modules">
+    <script>try { if(localStorage.getItem('night-mode')) document.body.className += ' night-mode'; } catch (e) { }</script>
+
+    <div class="main">
+<button class="sidebar-toggle">
+  <span class="icon-menu" aria-hidden="true"></span>
+  <span class="sr-only">Toggle Sidebar</span>
+</button>
+<section class="sidebar">
+
+  
+  <a href="Drab.html" class="sidebar-projectLink">
+    <div class="sidebar-projectDetails">
+      <h1 class="sidebar-projectName">
+        drab
+      </h1>
+      <h2 class="sidebar-projectVersion">
+        v0.5.6
+      </h2>
+    </div>
+    
+      <img src="assets/logo.png" alt="drab" class="sidebar-projectImage">
+    
+  </a>
+
+  <form class="sidebar-search" action="search.html">
+    <button type="submit" class="search-button">
+      <span class="icon-search" aria-hidden="true"></span>
+    </button>
+    <input name="q" type="text" id="search-list" class="search-input" placeholder="search" aria-label="Search" autocomplete="off" />
+  </form>
+
+  <ul class="sidebar-listNav">
+    <li><a id="extras-list" href="#full-list">Pages</a></li>
+
+    
+      <li><a id="modules-list" href="#full-list">Modules</a></li>
+    
+
+    
+      <li><a id="exceptions-list" href="#full-list">Exceptions</a></li>
+    
+
+    
+      <li><a id="tasks-list" href="#full-list">Mix Tasks</a></li>
+    
+  </ul>
+  <div class="gradient"></div>
+  <ul id="full-list" class="sidebar-fullList"></ul>
+</section>
+
+<section class="content">
+  <div class="content-outer">
+    <div id="content" class="content-inner">
+
+
+      <h1>
+        <small class="visible-xs">drab v0.5.6</small>
+        Drab.Element
+        
+      </h1>
+
+      
+        <section id="moduledoc">
+          <p>HTML element query and manipulation library.</p>
+<p>All functions are based on the CSS selectors. <a href="#query/3"><code class="inline">query/3</code></a> runs <code class="inline">document.querySelector</code> and returns selected 
+properties of found HTML elements.</p>
+<p><a href="#set_prop/3"><code class="inline">set_prop/3</code></a> is a general function for update elements properties. There are also a bunch of helpers 
+(<a href="#set_style/3"><code class="inline">set_style/3</code></a> or <a href="#set_attr/3"><code class="inline">set_attr/3</code></a>), for updating a style of attributes of an element.</p>
+
+        </section>
+      
+
+      
+        <section id="summary" class="details-list">
+          <h1 class="section-heading">
+            <a class="hover-link" href="#summary">
+              <span class="icon-link" aria-hidden="true"></span>
+              <span class="sr-only">Link to this section</span>
+            </a>
+            Summary
+          </h1>
+          
+
+          
+  <div class="summary-functions summary">
+    <h2>
+      <a href="#functions">Functions</a>
+    </h2>
+    <div class="summary-row">
+  <div class="summary-signature">
+    <a href="#broadcast_insert/4">broadcast_insert(subject, selector, position, html)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Broadcasting version of <a href="#insert_html/4"><code class="inline">insert_html/4</code></a></p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#broadcast_prop/3">broadcast_prop(subject, selector, properties)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Broadcasting version of <a href="#set_prop/3"><code class="inline">set_prop/3</code></a></p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#insert_html/4">insert_html(socket, selector, position, html)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Parses the specified text as HTML and inserts the resulting nodes into the DOM tree at a specified position</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#insert_html!/4">insert_html!(socket, selector, position, html)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Exception-throwing version of insert_html/4</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#query/2">query(socket, selector)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Like <a href="#query/3"><code class="inline">query/3</code></a>, but returns most popular properties. To be used for debugging / inspecting</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#query/3">query(socket, selector, property_or_properties_list)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Queries for the selector in the browser and collects found element properties</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#query!/2">query!(socket, selector)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Like <a href="#query!/3"><code class="inline">query!/3</code></a>, but returns most popular properties. To be used for debugging / inspecting</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#query!/3">query!(socket, selector, property_or_properties_list)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Like <a href="#query/3"><code class="inline">query/3</code></a>, but raises instead of returning <code class="inline">{:error, reason}</code></p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#query_one/2">query_one(socket, selector)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Like <a href="#query_one/3"><code class="inline">query_one/3</code></a>, but returns most popular properties. To be used for debugging / inspecting</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#query_one/3">query_one(socket, selector, property_or_properties_list)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Queries the browser for elements with selector. Expects at most one element to be found</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#query_one!/2">query_one!(socket, selector)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Like <a href="#query_one!/3"><code class="inline">query_one!/3</code></a>, but returns most popular properties. To be used for debugging / inspecting</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#query_one!/3">query_one!(socket, selector, property_or_properties_list)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Exception raising version of <a href="#query_one/3"><code class="inline">query_one/3</code></a></p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#set_attr/3">set_attr(socket, selector, attributes)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Helper for setting the attributes of found elements. A shorthand for</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#set_attr!/3">set_attr!(socket, selector, attributes)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Bang version of <a href="#set_attr/3"><code class="inline">set_attr/3</code></a>. Raises exception on error</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#set_data/3">set_data(socket, selector, dataset)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Helper for setting the dataset of elements. A shorthand for</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#set_data!/3">set_data!(socket, selector, dataset)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Bang version of <a href="#set_data/3"><code class="inline">set_data/3</code></a>. Raises exception on error</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#set_prop/3">set_prop(socket, selector, properties)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Finds all html elements using <code class="inline">selector</code> and sets their properties</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#set_prop!/3">set_prop!(socket, selector, properties)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Bang version of <a href="#set_prop/3"><code class="inline">set_prop/3</code></a>, raises exception on error</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#set_style/3">set_style(socket, selector, properties)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Helper for setting the <code class="inline">style</code> property of found elements. A shorthand for</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#set_style!/3">set_style!(socket, selector, properties)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Bang version of <a href="#set_style/3"><code class="inline">set_style/3</code></a>. Raises exception on error</p>
+</div>
+  
+</div>
+
+  </div>
+
+
+          
+
+        </section>
+      
+
+      
+
+      
+        <section id="functions" class="details-list">
+          <h1 class="section-heading">
+            <a class="hover-link" href="#functions">
+              <span class="icon-link" aria-hidden="true"></span>
+              <span class="sr-only">Link to this section</span>
+            </a>
+            Functions
+          </h1>
+          <div class="detail" id="broadcast_insert/4">
+  
+  
+  <div class="detail-header">
+    <a href="#broadcast_insert/4" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">broadcast_insert(subject, selector, position, html)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Broadcasting version of <a href="#insert_html/4"><code class="inline">insert_html/4</code></a>.</p>
+<p>It does exactly the same as <a href="#insert_html/4"><code class="inline">insert_html/4</code></a>, but instead of pushing the message to the current browser, 
+it broadcasts it to all connected users.</p>
+<p>Always returns <code class="inline">{:ok, :broadcasted}</code>.</p>
+<p>See <a href="Drab.Core.html#broadcast_js/2"><code class="inline">Drab.Core.broadcast_js/2</code></a> for broadcasting options.</p>
+
+  </section>
+</div>
+<div class="detail" id="broadcast_prop/3">
+  
+  
+  <div class="detail-header">
+    <a href="#broadcast_prop/3" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">broadcast_prop(subject, selector, properties)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Broadcasting version of <a href="#set_prop/3"><code class="inline">set_prop/3</code></a>.</p>
+<p>It does exactly the same as <a href="#set_prop/3"><code class="inline">set_prop/3</code></a>, but instead of pushing the message to the current browser, 
+it broadcasts it to all connected users.</p>
+<p>Always returns <code class="inline">{:ok, :broadcasted}</code>.</p>
+<p>See <a href="Drab.Core.html#broadcast_js/2"><code class="inline">Drab.Core.broadcast_js/2</code></a> for broadcasting options.</p>
+
+  </section>
+</div>
+<div class="detail" id="insert_html/4">
+  
+  
+  <div class="detail-header">
+    <a href="#insert_html/4" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">insert_html(socket, selector, position, html)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Parses the specified text as HTML and inserts the resulting nodes into the DOM tree at a specified position.</p>
+<p>Position is the position relative to the element found by the selector, and must be one of the following strings
+or atoms:</p>
+<ul>
+<li><code class="inline">:beforebegin</code> - before the found element
+</li>
+<li><code class="inline">:afterbegin</code> - inside the element, before its first child
+</li>
+<li><code class="inline">:beforeend</code> - inside the element, after its last child
+</li>
+<li><code class="inline">:afterend</code> - after the element itself
+</li>
+</ul>
+<p>Visit https://developer.mozilla.org/en-US/docs/Web/API/Element/insertAdjacentHTML for more information.</p>
+<p>Returns tuple <code class="inline">{:ok, number}</code> with number of updated elements or <code class="inline">{:error, description}</code>.</p>
+<p>Examples:</p>
+<pre><code class="nohighlight makeup"><span class="n">ex</span><span class="o">&gt;</span><span class="w"> </span><span class="n">insert_html</span><span class="p" data-group-id="142">(</span><span class="n">socket</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;div&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">:beforebegin</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;&lt;b&gt;MORE&lt;/b&gt;&quot;</span><span class="p" data-group-id="142">)</span><span class="w">
+</span><span class="p" data-group-id="147">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p" data-group-id="147">}</span></code></pre>
+
+  </section>
+</div>
+<div class="detail" id="insert_html!/4">
+  
+  
+  <div class="detail-header">
+    <a href="#insert_html!/4" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">insert_html!(socket, selector, position, html)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Exception-throwing version of insert_html/4</p>
+
+  </section>
+</div>
+<div class="detail" id="query/2">
+  
+  
+  <div class="detail-header">
+    <a href="#query/2" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">query(socket, selector)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Like <a href="#query/3"><code class="inline">query/3</code></a>, but returns most popular properties. To be used for debugging / inspecting.</p>
+<p>Example: </p>
+<pre><code class="nohighlight makeup"><span class="gp">iex&gt;</span><span class="w"> </span><span class="n">query</span><span class="w"> </span><span class="n">socket</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;a&quot;</span><span class="w">
+</span><span class="p" data-group-id="216">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w">
+ </span><span class="p" data-group-id="215">%{</span><span class="s2">&quot;[drab-id=&apos;13114f0a-d65c-4486-b46e-86809aa00b7f&apos;]&quot;</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p" data-group-id="214">%{</span><span class="w">
+       </span><span class="s2">&quot;attributes&quot;</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p" data-group-id="189">%{</span><span class="s2">&quot;drab-id&quot;</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s2">&quot;13114f0a-d65c-4486-b46e-86809aa00b7f&quot;</span><span class="p">,</span><span class="w">
+       </span><span class="s2">&quot;href&quot;</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s2">&quot;http://tg.pl&quot;</span><span class="p" data-group-id="189">}</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;classList&quot;</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p" data-group-id="196">[]</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;className&quot;</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span><span class="w">
+     </span><span class="s2">&quot;dataset&quot;</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p" data-group-id="202">%{}</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;drab_id&quot;</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s2">&quot;13114f0a-d65c-4486-b46e-86809aa00b7f&quot;</span><span class="p">,</span><span class="w">
+     </span><span class="s2">&quot;id&quot;</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;innerHTML&quot;</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s2">&quot;tg.pl&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;innerText&quot;</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s2">&quot;tg.pl&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;name&quot;</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span><span class="w">
+     </span><span class="s2">&quot;style&quot;</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p" data-group-id="211">%{}</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;tagName&quot;</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s2">&quot;A&quot;</span><span class="p" data-group-id="214">}</span><span class="p" data-group-id="215">}</span><span class="p" data-group-id="216">}</span></code></pre>
+
+  </section>
+</div>
+<div class="detail" id="query/3">
+  
+  
+  <div class="detail-header">
+    <a href="#query/3" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">query(socket, selector, property_or_properties_list)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Queries for the selector in the browser and collects found element properties.</p>
+<p><code class="inline">property_or_properties_list</code> specifies what properties will be returned. It may either be a string, 
+an atom or a list of strings or atoms.</p>
+<p>Returns:</p>
+<ul>
+<li><p><code class="inline">{:ok, map}</code> - where the <code class="inline">map</code> contains queried elements. </p>
+<p>  The keys are selectors which clearly identify the element: if the object has an <code class="inline">id</code> declared - a string 
+  of <code class="inline">&quot;#id&quot;</code>, otherwise Drab declares the <code class="inline">drab-id</code> attribute and the key became <code class="inline">&quot;[drab-id=&#39;...&#39;]&quot;</code>.</p>
+<p>  Values of the map are maps of <code class="inline">%{property =&gt; property_value}</code>. Notice that for some properties (like 
+  <code class="inline">style</code> or <code class="inline">dataset</code>), the property_value is a map as well.</p>
+</li>
+<li><p><code class="inline">{:error, message}</code> - the browser could not be queried</p>
+</li>
+</ul>
+<p>Examples:</p>
+<pre><code class="nohighlight makeup"><span class="gp">iex&gt;</span><span class="w"> </span><span class="n">query</span><span class="w"> </span><span class="n">socket</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;button&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">:clientWidth</span><span class="w"> 
+</span><span class="p" data-group-id="230">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="229">%{</span><span class="s2">&quot;#button1&quot;</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p" data-group-id="228">%{</span><span class="s2">&quot;clientWidth&quot;</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="mi">66</span><span class="p" data-group-id="228">}</span><span class="p" data-group-id="229">}</span><span class="p" data-group-id="230">}</span><span class="w">
+
+</span><span class="gp">iex(170)&gt;</span><span class="w"> </span><span class="n">query</span><span class="w"> </span><span class="n">socket</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;div&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">:id</span><span class="w">       
+</span><span class="p" data-group-id="246">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w">
+ </span><span class="p" data-group-id="245">%{</span><span class="s2">&quot;#begin&quot;</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p" data-group-id="237">%{</span><span class="s2">&quot;id&quot;</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s2">&quot;begin&quot;</span><span class="p" data-group-id="237">}</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;#drab_pid&quot;</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p" data-group-id="240">%{</span><span class="s2">&quot;id&quot;</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s2">&quot;drab_pid&quot;</span><span class="p" data-group-id="240">}</span><span class="p">,</span><span class="w">
+   </span><span class="s2">&quot;[drab-id=&apos;472a5f90-c5cf-434b-bdf1-7ee236d67938&apos;]&quot;</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p" data-group-id="244">%{</span><span class="s2">&quot;id&quot;</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p" data-group-id="244">}</span><span class="p" data-group-id="245">}</span><span class="p" data-group-id="246">}</span><span class="w">
+
+</span><span class="gp">iex&gt;</span><span class="w"> </span><span class="n">query</span><span class="w"> </span><span class="n">socket</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;button&quot;</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="249">[</span><span class="s2">&quot;dataset&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;clientWidth&quot;</span><span class="p" data-group-id="249">]</span><span class="w">
+</span><span class="p" data-group-id="259">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w">
+ </span><span class="p" data-group-id="258">%{</span><span class="s2">&quot;#button1&quot;</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p" data-group-id="257">%{</span><span class="s2">&quot;clientWidth&quot;</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="mi">66</span><span class="p">,</span><span class="w">
+     </span><span class="s2">&quot;dataset&quot;</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p" data-group-id="256">%{</span><span class="s2">&quot;d1&quot;</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s2">&quot;[1,2,3]&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;d1x&quot;</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s2">&quot;[1,2,3]&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;d2&quot;</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s2">&quot;[1, 2]&quot;</span><span class="p">,</span><span class="w">
+       </span><span class="s2">&quot;d3&quot;</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s2">&quot;d3&quot;</span><span class="p" data-group-id="256">}</span><span class="p" data-group-id="257">}</span><span class="p" data-group-id="258">}</span><span class="p" data-group-id="259">}</span></code></pre>
+
+  </section>
+</div>
+<div class="detail" id="query!/2">
+  
+  
+  <div class="detail-header">
+    <a href="#query!/2" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">query!(socket, selector)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Like <a href="#query!/3"><code class="inline">query!/3</code></a>, but returns most popular properties. To be used for debugging / inspecting.</p>
+
+  </section>
+</div>
+<div class="detail" id="query!/3">
+  
+  
+  <div class="detail-header">
+    <a href="#query!/3" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">query!(socket, selector, property_or_properties_list)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Like <a href="#query/3"><code class="inline">query/3</code></a>, but raises instead of returning <code class="inline">{:error, reason}</code>.</p>
+
+  </section>
+</div>
+<div class="detail" id="query_one/2">
+  
+  
+  <div class="detail-header">
+    <a href="#query_one/2" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">query_one(socket, selector)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Like <a href="#query_one/3"><code class="inline">query_one/3</code></a>, but returns most popular properties. To be used for debugging / inspecting.</p>
+
+  </section>
+</div>
+<div class="detail" id="query_one/3">
+  
+  
+  <div class="detail-header">
+    <a href="#query_one/3" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">query_one(socket, selector, property_or_properties_list)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Queries the browser for elements with selector. Expects at most one element to be found.</p>
+<p>Similar to <a href="#query/3"><code class="inline">query/3</code></a>, but always returns a map of properties of one element (or <code class="inline">{:ok, nil}</code> if not found).
+Returns <code class="inline">{:too_many, message}</code> if found more than one element.</p>
+<p>Examples:</p>
+<pre><code class="nohighlight makeup"><span class="gp">iex&gt;</span><span class="w"> </span><span class="n">query_one</span><span class="w"> </span><span class="n">socket</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;button&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">:innerText</span><span class="w"> 
+</span><span class="p" data-group-id="264">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="263">%{</span><span class="s2">&quot;innerText&quot;</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s2">&quot;Button&quot;</span><span class="p" data-group-id="263">}</span><span class="p" data-group-id="264">}</span><span class="w">
+
+</span><span class="gp">iex&gt;</span><span class="w"> </span><span class="n">query_one</span><span class="w"> </span><span class="n">socket</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;button&quot;</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="266">[</span><span class="s2">&quot;innerHTML&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;dataset&quot;</span><span class="p" data-group-id="266">]</span><span class="w">
+</span><span class="p" data-group-id="270">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w">
+ </span><span class="p" data-group-id="269">%{</span><span class="s2">&quot;dataset&quot;</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p" data-group-id="268">%{</span><span class="s2">&quot;d1&quot;</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s2">&quot;1&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;d2&quot;</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s2">&quot;[1, 2]&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;d3&quot;</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s2">&quot;d3&quot;</span><span class="p" data-group-id="268">}</span><span class="p">,</span><span class="w">
+   </span><span class="s2">&quot;innerHTML&quot;</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">  Button</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p" data-group-id="269">}</span><span class="p" data-group-id="270">}</span></code></pre>
+
+  </section>
+</div>
+<div class="detail" id="query_one!/2">
+  
+  
+  <div class="detail-header">
+    <a href="#query_one!/2" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">query_one!(socket, selector)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Like <a href="#query_one!/3"><code class="inline">query_one!/3</code></a>, but returns most popular properties. To be used for debugging / inspecting.</p>
+
+  </section>
+</div>
+<div class="detail" id="query_one!/3">
+  
+  
+  <div class="detail-header">
+    <a href="#query_one!/3" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">query_one!(socket, selector, property_or_properties_list)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Exception raising version of <a href="#query_one/3"><code class="inline">query_one/3</code></a>.</p>
+
+  </section>
+</div>
+<div class="detail" id="set_attr/3">
+  
+  
+  <div class="detail-header">
+    <a href="#set_attr/3" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">set_attr(socket, selector, attributes)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Helper for setting the attributes of found elements. A shorthand for:</p>
+<pre><code class="nohighlight makeup"><span class="n">set_prop</span><span class="p" data-group-id="275">(</span><span class="n">socket</span><span class="p">,</span><span class="w"> </span><span class="n">selector</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="274">%{</span><span class="s2">&quot;attributes&quot;</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">attributes</span><span class="p" data-group-id="274">}</span><span class="p" data-group-id="275">)</span></code></pre>
+<p>Examples:</p>
+<pre><code class="nohighlight makeup"><span class="gp">iex&gt;</span><span class="w"> </span><span class="n">set_attr</span><span class="w"> </span><span class="n">socket</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;a&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">href</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://tg.pl/drab&quot;</span><span class="w">
+</span><span class="p" data-group-id="276">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p" data-group-id="276">}</span><span class="w">  </span></code></pre>
+
+  </section>
+</div>
+<div class="detail" id="set_attr!/3">
+  
+  
+  <div class="detail-header">
+    <a href="#set_attr!/3" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">set_attr!(socket, selector, attributes)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Bang version of <a href="#set_attr/3"><code class="inline">set_attr/3</code></a>. Raises exception on error.</p>
+
+  </section>
+</div>
+<div class="detail" id="set_data/3">
+  
+  
+  <div class="detail-header">
+    <a href="#set_data/3" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">set_data(socket, selector, dataset)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Helper for setting the dataset of elements. A shorthand for:</p>
+<pre><code class="nohighlight makeup"><span class="n">set_prop</span><span class="p" data-group-id="279">(</span><span class="n">socket</span><span class="p">,</span><span class="w"> </span><span class="n">selector</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="278">%{</span><span class="s2">&quot;dataset&quot;</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">dataset</span><span class="p" data-group-id="278">}</span><span class="p" data-group-id="279">)</span></code></pre>
+<p>Examples:</p>
+<pre><code class="nohighlight makeup"><span class="gp">iex&gt;</span><span class="w"> </span><span class="n">set_data</span><span class="w"> </span><span class="n">socket</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;button&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">foo</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;bar&quot;</span><span class="w">   
+</span><span class="p" data-group-id="280">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p" data-group-id="280">}</span></code></pre>
+
+  </section>
+</div>
+<div class="detail" id="set_data!/3">
+  
+  
+  <div class="detail-header">
+    <a href="#set_data!/3" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">set_data!(socket, selector, dataset)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Bang version of <a href="#set_data/3"><code class="inline">set_data/3</code></a>. Raises exception on error.</p>
+
+  </section>
+</div>
+<div class="detail" id="set_prop/3">
+  
+  
+  <div class="detail-header">
+    <a href="#set_prop/3" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">set_prop(socket, selector, properties)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Finds all html elements using <code class="inline">selector</code> and sets their properties.</p>
+<p>Takes a map or keyword list of properties to be set, where the key is a property name and the value
+is the new value to be set. If the property is a Javascript object (like <code class="inline">style</code> or <code class="inline">attributes</code>), it expects
+a map.</p>
+<p>Returns tuple <code class="inline">{:ok, number}</code> with number of updated elements or <code class="inline">{:error, description}</code>.</p>
+<p>Examples:</p>
+<pre><code class="nohighlight makeup"><span class="gp">iex&gt;</span><span class="w"> </span><span class="n">set_prop</span><span class="w"> </span><span class="n">socket</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;a&quot;</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="289">%{</span><span class="s2">&quot;attributes&quot;</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p" data-group-id="288">%{</span><span class="s2">&quot;class&quot;</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s2">&quot;btn btn-warning&quot;</span><span class="p" data-group-id="288">}</span><span class="p" data-group-id="289">}</span><span class="w">
+</span><span class="p" data-group-id="290">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p" data-group-id="290">}</span><span class="w">
+
+</span><span class="gp">iex&gt;</span><span class="w"> </span><span class="n">set_prop</span><span class="w"> </span><span class="n">socket</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;button&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">style</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="306">%{</span><span class="s2">&quot;backgroundColor&quot;</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s2">&quot;red&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;width&quot;</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s2">&quot;200px&quot;</span><span class="p" data-group-id="306">}</span><span class="w">
+</span><span class="p" data-group-id="308">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p" data-group-id="308">}</span><span class="w">
+
+</span><span class="gp">iex&gt;</span><span class="w"> </span><span class="n">set_prop</span><span class="w"> </span><span class="n">socket</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;div&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">innerHTML</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;updated&quot;</span><span class="w">              
+</span><span class="p" data-group-id="311">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p" data-group-id="311">}</span></code></pre>
+<p>You may store any JS encodable value in the property:</p>
+<pre><code class="nohighlight makeup"><span class="gp">iex&gt;</span><span class="w"> </span><span class="n">set_prop</span><span class="w"> </span><span class="n">socket</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;#button1&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">custom</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="285">%{</span><span class="ss">example</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="284">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p" data-group-id="284">]</span><span class="p" data-group-id="285">}</span><span class="w">
+</span><span class="p" data-group-id="287">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p" data-group-id="287">}</span><span class="w">
+</span><span class="gp">iex&gt;</span><span class="w"> </span><span class="n">query_one</span><span class="w"> </span><span class="n">socket</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;#button1&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">:custom</span><span class="w">                     
+</span><span class="p" data-group-id="302">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="301">%{</span><span class="s2">&quot;custom&quot;</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p" data-group-id="300">%{</span><span class="s2">&quot;example&quot;</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p" data-group-id="299">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p" data-group-id="299">]</span><span class="p" data-group-id="300">}</span><span class="p" data-group-id="301">}</span><span class="p" data-group-id="302">}</span></code></pre>
+
+  </section>
+</div>
+<div class="detail" id="set_prop!/3">
+  
+  
+  <div class="detail-header">
+    <a href="#set_prop!/3" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">set_prop!(socket, selector, properties)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Bang version of <a href="#set_prop/3"><code class="inline">set_prop/3</code></a>, raises exception on error.</p>
+<p>Returns number of updated element.</p>
+
+  </section>
+</div>
+<div class="detail" id="set_style/3">
+  
+  
+  <div class="detail-header">
+    <a href="#set_style/3" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">set_style(socket, selector, properties)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Helper for setting the <code class="inline">style</code> property of found elements. A shorthand for:</p>
+<pre><code class="nohighlight makeup"><span class="n">set_prop</span><span class="p" data-group-id="321">(</span><span class="n">socket</span><span class="p">,</span><span class="w"> </span><span class="n">selector</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="319">%{</span><span class="s2">&quot;style&quot;</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">properties</span><span class="p" data-group-id="319">}</span><span class="err">}</span><span class="p" data-group-id="321">)</span></code></pre>
+<p>Examples:</p>
+<pre><code class="nohighlight makeup"><span class="gp">iex&gt;</span><span class="w"> </span><span class="n">set_style</span><span class="w"> </span><span class="n">socket</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;button&quot;</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="320">%{</span><span class="s2">&quot;backgroundColor&quot;</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s2">&quot;red&quot;</span><span class="p" data-group-id="320">}</span><span class="w">  
+</span><span class="p" data-group-id="322">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p" data-group-id="322">}</span><span class="w">
+
+</span><span class="gp">iex&gt;</span><span class="w"> </span><span class="n">set_style</span><span class="w"> </span><span class="n">socket</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;button&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">height</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;100px&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">width</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;200px&quot;</span><span class="w">
+</span><span class="p" data-group-id="323">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p" data-group-id="323">}</span></code></pre>
+
+  </section>
+</div>
+<div class="detail" id="set_style!/3">
+  
+  
+  <div class="detail-header">
+    <a href="#set_style!/3" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">set_style!(socket, selector, properties)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Bang version of <a href="#set_style/3"><code class="inline">set_style/3</code></a>. Raises exception on error.</p>
+
+  </section>
+</div>
+
+        </section>
+      
+
+      
+          <footer class="footer">
+        <p>
+          <span class="line">
+            Built using
+            <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" rel="help" target="_blank">ExDoc</a> (v0.17.1),
+          </span>
+          <span class="line">
+            designed by
+            <a href="https://twitter.com/dignifiedquire" target="_blank" title="@dignifiedquire">Friedel Ziegelmayer</a>.
+            </span>
+        </p>
+        <button class="night-mode-toggle"><span class="sr-only">Switch theme</span></button>
+      </footer>
+    </div>
+  </div>
+</section>
+</div>
+  <script src="dist/app-4cfb39be16.js"></script>
+  <script src="assets/makedown.js"></script>
+  </body>
+</html>
+

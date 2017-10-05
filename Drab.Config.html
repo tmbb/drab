@@ -1,0 +1,445 @@
+    <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="ExDoc v0.17.1">
+    <title>Drab.Config – drab v0.5.6</title>
+    <link rel="stylesheet" href="dist/app-110d9134a6.css" />
+    
+    
+      
+        <link rel="icon" type="image/png" href="assets/logo.png" />
+      
+      
+    
+    <script src="dist/sidebar_items-6fa2c1b3f2.js"></script>
+    <link rel="stylesheet" href="assets/makedown.css"/>
+  </head>
+  <body data-type="modules">
+    <script>try { if(localStorage.getItem('night-mode')) document.body.className += ' night-mode'; } catch (e) { }</script>
+
+    <div class="main">
+<button class="sidebar-toggle">
+  <span class="icon-menu" aria-hidden="true"></span>
+  <span class="sr-only">Toggle Sidebar</span>
+</button>
+<section class="sidebar">
+
+  
+  <a href="Drab.html" class="sidebar-projectLink">
+    <div class="sidebar-projectDetails">
+      <h1 class="sidebar-projectName">
+        drab
+      </h1>
+      <h2 class="sidebar-projectVersion">
+        v0.5.6
+      </h2>
+    </div>
+    
+      <img src="assets/logo.png" alt="drab" class="sidebar-projectImage">
+    
+  </a>
+
+  <form class="sidebar-search" action="search.html">
+    <button type="submit" class="search-button">
+      <span class="icon-search" aria-hidden="true"></span>
+    </button>
+    <input name="q" type="text" id="search-list" class="search-input" placeholder="search" aria-label="Search" autocomplete="off" />
+  </form>
+
+  <ul class="sidebar-listNav">
+    <li><a id="extras-list" href="#full-list">Pages</a></li>
+
+    
+      <li><a id="modules-list" href="#full-list">Modules</a></li>
+    
+
+    
+      <li><a id="exceptions-list" href="#full-list">Exceptions</a></li>
+    
+
+    
+      <li><a id="tasks-list" href="#full-list">Mix Tasks</a></li>
+    
+  </ul>
+  <div class="gradient"></div>
+  <ul id="full-list" class="sidebar-fullList"></ul>
+</section>
+
+<section class="content">
+  <div class="content-outer">
+    <div id="content" class="content-inner">
+
+
+      <h1>
+        <small class="visible-xs">drab v0.5.6</small>
+        Drab.Config
+        
+      </h1>
+
+      
+        <section id="moduledoc">
+          <p>Drab configuration related functions.</p>
+
+        </section>
+      
+
+      
+        <section id="summary" class="details-list">
+          <h1 class="section-heading">
+            <a class="hover-link" href="#summary">
+              <span class="icon-link" aria-hidden="true"></span>
+              <span class="sr-only">Link to this section</span>
+            </a>
+            Summary
+          </h1>
+          
+
+          
+  <div class="summary-functions summary">
+    <h2>
+      <a href="#functions">Functions</a>
+    </h2>
+    <div class="summary-row">
+  <div class="summary-signature">
+    <a href="#app_config/0">app_config()</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Returns the config for current main Application</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#app_config/1">app_config(config_key)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Returns any config key for current main Application</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#app_env/0">app_env()</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Returns all environment for the default main Application</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#app_module/0">app_module()</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Returns the Phoenix Application module atom</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#app_name/0">app_name()</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Returns the name of the client Phoenix Application</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#drab_extension/0">drab_extension()</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Returns configured Drab.Live.Engine Extension. String with dot at the begin</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#endpoint/0">endpoint()</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Returns the Endpoint of the client Phoenix Application</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#get/1">get(arg1)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Returns Drab configuration for the given atom</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#pubsub/0">pubsub()</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Returns the PubSub module of the client Phoenix Application</p>
+</div>
+  
+</div>
+
+  </div>
+
+
+          
+
+        </section>
+      
+
+      
+
+      
+        <section id="functions" class="details-list">
+          <h1 class="section-heading">
+            <a class="hover-link" href="#functions">
+              <span class="icon-link" aria-hidden="true"></span>
+              <span class="sr-only">Link to this section</span>
+            </a>
+            Functions
+          </h1>
+          <div class="detail" id="app_config/0">
+  
+  
+  <div class="detail-header">
+    <a href="#app_config/0" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">app_config()</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Returns the config for current main Application</p>
+<pre><code class="nohighlight makeup"><span class="gp">iex&gt;</span><span class="w"> </span><span class="n">is_list</span><span class="p" data-group-id="51">(</span><span class="nc">Drab.Config</span><span class="o">.</span><span class="n">app_config</span><span class="p" data-group-id="50">()</span><span class="p" data-group-id="51">)</span><span class="w">
+</span><span class="no">true</span></code></pre>
+
+  </section>
+</div>
+<div class="detail" id="app_config/1">
+  
+  
+  <div class="detail-header">
+    <a href="#app_config/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">app_config(config_key)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Returns any config key for current main Application</p>
+<pre><code class="nohighlight makeup"><span class="gp">iex&gt;</span><span class="w"> </span><span class="nc">Drab</span><span class="o">.</span><span class="n">app_config</span><span class="p" data-group-id="64">(</span><span class="ss">:secret_key_base</span><span class="p" data-group-id="64">)</span><span class="w">
+</span><span class="s2">&quot;bP1ZF+DDZiAVGuIixHSboET1g18BPO4HeZnggJA/7q&quot;</span></code></pre>
+
+  </section>
+</div>
+<div class="detail" id="app_env/0">
+  
+  
+  <div class="detail-header">
+    <a href="#app_env/0" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">app_env()</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Returns all environment for the default main Application</p>
+<pre><code class="nohighlight makeup"><span class="gp">iex&gt;</span><span class="w"> </span><span class="n">is_list</span><span class="p" data-group-id="95">(</span><span class="nc">Drab.Config</span><span class="o">.</span><span class="n">app_config</span><span class="p" data-group-id="94">()</span><span class="p" data-group-id="95">)</span><span class="w">
+</span><span class="no">true</span></code></pre>
+
+  </section>
+</div>
+<div class="detail" id="app_module/0">
+  
+  
+  <div class="detail-header">
+    <a href="#app_module/0" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">app_module()</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Returns the Phoenix Application module atom</p>
+<pre><code class="nohighlight makeup"><span class="gp">iex&gt;</span><span class="w"> </span><span class="nc">Drab.Config</span><span class="o">.</span><span class="n">app_module</span><span class="p" data-group-id="115">()</span><span class="w">
+</span><span class="nc">DrabTestApp</span></code></pre>
+
+  </section>
+</div>
+<div class="detail" id="app_name/0">
+  
+  
+  <div class="detail-header">
+    <a href="#app_name/0" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">app_name()</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Returns the name of the client Phoenix Application</p>
+<pre><code class="nohighlight makeup"><span class="gp">iex&gt;</span><span class="w"> </span><span class="nc">Drab.Config</span><span class="o">.</span><span class="n">app_name</span><span class="p" data-group-id="126">()</span><span class="w">
+</span><span class="ss">:drab</span></code></pre>
+
+  </section>
+</div>
+<div class="detail" id="drab_extension/0">
+  
+  
+  <div class="detail-header">
+    <a href="#drab_extension/0" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">drab_extension()</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Returns configured Drab.Live.Engine Extension. String with dot at the begin.</p>
+<p>Example, for config:</p>
+<pre><code class="nohighlight makeup"><span class="n">config</span><span class="w"> </span><span class="ss">:phoenix</span><span class="p">,</span><span class="w"> </span><span class="ss">:template_engines</span><span class="p">,</span><span class="w">
+  </span><span class="ss">drab</span><span class="p">:</span><span class="w"> </span><span class="nc">Drab.Live.Engine</span></code></pre>
+<p>it will return “.drab”</p>
+<pre><code class="nohighlight makeup"><span class="gp">iex&gt;</span><span class="w"> </span><span class="nc">Drab.Config</span><span class="o">.</span><span class="n">drab_extension</span><span class="p" data-group-id="144">()</span><span class="w">
+</span><span class="s2">&quot;.drab&quot;</span></code></pre>
+
+  </section>
+</div>
+<div class="detail" id="endpoint/0">
+  
+  
+  <div class="detail-header">
+    <a href="#endpoint/0" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">endpoint()</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Returns the Endpoint of the client Phoenix Application</p>
+<pre><code class="nohighlight makeup"><span class="gp">iex&gt;</span><span class="w"> </span><span class="nc">Drab.Config</span><span class="o">.</span><span class="n">endpoint</span><span class="p" data-group-id="151">()</span><span class="w">  
+</span><span class="nc">DrabTestApp.Endpoint</span></code></pre>
+
+  </section>
+</div>
+<div class="detail" id="get/1">
+  
+  
+  <div class="detail-header">
+    <a href="#get/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">get(arg1)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Returns Drab configuration for the given atom.</p>
+<pre><code class="nohighlight makeup"><span class="gp">iex&gt;</span><span class="w"> </span><span class="nc">Drab.Config</span><span class="o">.</span><span class="n">get</span><span class="p" data-group-id="165">(</span><span class="ss">:templates_path</span><span class="p" data-group-id="165">)</span><span class="w">
+</span><span class="s2">&quot;test/support/priv/templates/drab&quot;</span></code></pre>
+<p>All the config values may be override in <code class="inline">config.exs</code>, for example:</p>
+<pre><code class="nohighlight makeup"><span class="n">config</span><span class="w"> </span><span class="ss">:drab</span><span class="p">,</span><span class="w"> </span><span class="ss">disable_controls_while_processing</span><span class="p">:</span><span class="w"> </span><span class="no">false</span></code></pre>
+<p>Configuration options:</p>
+<ul>
+<li><code class="inline">templates_path</code> (default: “priv/templates/drab”) - path to the user templates (may be new or override default 
+  templates)
+</li>
+<li><code class="inline">disable_controls_while_processing</code> (default: <code class="inline">true</code>) - after sending request to the server, sender will be 
+  disabled until get the answer; warning: this behaviour is not broadcasted, so only the control in the current
+  browers will be disabled
+</li>
+<li><code class="inline">events_to_disable_while_processing</code> (default: <code class="inline">[&quot;click&quot;]</code>) - list of events which will be disabled when 
+  waiting for server response
+</li>
+<li><code class="inline">disable_controls_when_disconnected</code> (default: <code class="inline">true</code>) - disables control when there is no connectivity
+  between the browser and the server
+</li>
+<li><code class="inline">socket</code> (default: <code class="inline">&quot;/socket&quot;</code>) - path to the socket where Drab operates
+</li>
+<li><code class="inline">drab_store_storage</code> (default: :session_storage) - where to keep the Drab Store - :memory, :local_storage or 
+  :session_storage; data in memory is kept to the next page load, session storage persist until browser (or a tab) is
+  closed, and local storage is kept forever
+</li>
+<li><code class="inline">browser_response_timeout</code> - timeout, after which all functions querying/updating browser UI will give up; integer
+  in milliseconds or <code class="inline">:infinity</code>
+</li>
+<li><code class="inline">main_phoenix_app</code> - a name of your Phoenix application (atom); if not set it gets it from the <code class="inline">mix.exs</code>
+</li>
+</ul>
+
+  </section>
+</div>
+<div class="detail" id="pubsub/0">
+  
+  
+  <div class="detail-header">
+    <a href="#pubsub/0" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">pubsub()</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Returns the PubSub module of the client Phoenix Application</p>
+<pre><code class="nohighlight makeup"><span class="gp">iex&gt;</span><span class="w"> </span><span class="nc">Drab.Config</span><span class="o">.</span><span class="n">pubsub</span><span class="p" data-group-id="178">()</span><span class="w">  
+</span><span class="nc">DrabTestApp.PubSub</span></code></pre>
+
+  </section>
+</div>
+
+        </section>
+      
+
+      
+          <footer class="footer">
+        <p>
+          <span class="line">
+            Built using
+            <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" rel="help" target="_blank">ExDoc</a> (v0.17.1),
+          </span>
+          <span class="line">
+            designed by
+            <a href="https://twitter.com/dignifiedquire" target="_blank" title="@dignifiedquire">Friedel Ziegelmayer</a>.
+            </span>
+        </p>
+        <button class="night-mode-toggle"><span class="sr-only">Switch theme</span></button>
+      </footer>
+    </div>
+  </div>
+</section>
+</div>
+  <script src="dist/app-4cfb39be16.js"></script>
+  <script src="assets/makedown.js"></script>
+  </body>
+</html>
+

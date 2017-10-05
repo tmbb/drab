@@ -1,0 +1,815 @@
+    <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="ExDoc v0.17.1">
+    <title>Drab.Core – drab v0.5.6</title>
+    <link rel="stylesheet" href="dist/app-110d9134a6.css" />
+    
+    
+      
+        <link rel="icon" type="image/png" href="assets/logo.png" />
+      
+      
+    
+    <script src="dist/sidebar_items-6fa2c1b3f2.js"></script>
+    <link rel="stylesheet" href="assets/makedown.css"/>
+  </head>
+  <body data-type="modules">
+    <script>try { if(localStorage.getItem('night-mode')) document.body.className += ' night-mode'; } catch (e) { }</script>
+
+    <div class="main">
+<button class="sidebar-toggle">
+  <span class="icon-menu" aria-hidden="true"></span>
+  <span class="sr-only">Toggle Sidebar</span>
+</button>
+<section class="sidebar">
+
+  
+  <a href="Drab.html" class="sidebar-projectLink">
+    <div class="sidebar-projectDetails">
+      <h1 class="sidebar-projectName">
+        drab
+      </h1>
+      <h2 class="sidebar-projectVersion">
+        v0.5.6
+      </h2>
+    </div>
+    
+      <img src="assets/logo.png" alt="drab" class="sidebar-projectImage">
+    
+  </a>
+
+  <form class="sidebar-search" action="search.html">
+    <button type="submit" class="search-button">
+      <span class="icon-search" aria-hidden="true"></span>
+    </button>
+    <input name="q" type="text" id="search-list" class="search-input" placeholder="search" aria-label="Search" autocomplete="off" />
+  </form>
+
+  <ul class="sidebar-listNav">
+    <li><a id="extras-list" href="#full-list">Pages</a></li>
+
+    
+      <li><a id="modules-list" href="#full-list">Modules</a></li>
+    
+
+    
+      <li><a id="exceptions-list" href="#full-list">Exceptions</a></li>
+    
+
+    
+      <li><a id="tasks-list" href="#full-list">Mix Tasks</a></li>
+    
+  </ul>
+  <div class="gradient"></div>
+  <ul id="full-list" class="sidebar-fullList"></ul>
+</section>
+
+<section class="content">
+  <div class="content-outer">
+    <div id="content" class="content-inner">
+
+
+      <h1>
+        <small class="visible-xs">drab v0.5.6</small>
+        Drab.Core
+        
+      </h1>
+
+      
+        <section id="moduledoc">
+          <p>Drab Module with the basic communication from Server to the Browser. Does not require any libraries like jQuery,
+works on pure Phoenix.</p>
+<pre><code class="nohighlight makeup"><span class="kd">defmodule</span><span class="w"> </span><span class="nc">DrabPoc.JquerylessCommander</span><span class="w"> </span><span class="k" data-group-id="138">do</span><span class="w">
+  </span><span class="kn">use</span><span class="w"> </span><span class="nc">Drab.Commander</span><span class="p">,</span><span class="w"> </span><span class="ss">modules</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="99">[]</span><span class="w">
+
+  </span><span class="kd">def</span><span class="w"> </span><span class="nf">clicked</span><span class="p" data-group-id="107">(</span><span class="n">socket</span><span class="p">,</span><span class="w"> </span><span class="n">payload</span><span class="p" data-group-id="107">)</span><span class="w"> </span><span class="k" data-group-id="137">do</span><span class="w">
+    </span><span class="n">socket</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">console</span><span class="p" data-group-id="135">(</span><span class="s2">&quot;You&apos;ve sent me this: </span><span class="si" data-group-id="134">#{</span><span class="n">payload</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">inspect</span><span class="si" data-group-id="134">}</span><span class="s2">&quot;</span><span class="p" data-group-id="135">)</span><span class="w">
+  </span><span class="k" data-group-id="137">end</span><span class="w">
+</span><span class="k" data-group-id="138">end</span></code></pre>
+<p>See <a href="Drab.Commander.html"><code class="inline">Drab.Commander</code></a> for more info on Drab Modules.</p>
+<h2 id="module-events" class="section-heading">
+  <a href="#module-events" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Events
+</h2>
+
+<p>Events are defined directly in the HTML by adding <code class="inline">drab-event</code> and <code class="inline">drab-handler</code> properties:</p>
+<pre><code class="nohighlight makeup"><span class="o">&lt;</span><span class="n">button</span><span class="w"> </span><span class="n">drab</span><span class="o">-</span><span class="n">event</span><span class="o">=</span><span class="s1">&apos;click&apos;</span><span class="w"> </span><span class="n">drab</span><span class="o">-</span><span class="n">handler</span><span class="o">=</span><span class="s1">&apos;button_clicked&apos;</span><span class="o">&gt;</span><span class="n">clickme</span><span class="o">&lt;/</span><span class="n">button</span><span class="o">&gt;</span></code></pre>
+<p>Clicking such button launches <code class="inline">DrabExample.PageCommander.button_clicked/2</code> on the Phoenix server.</p>
+<p>There are few shortcuts for the most popular events: <code class="inline">click</code>, <code class="inline">keyup</code>, <code class="inline">keydown</code>, <code class="inline">change</code>. For this event
+an attribute <code class="inline">drab-EVENT_NAME</code> must be set. The following like is an equivalent for the previous one:</p>
+<pre><code class="nohighlight makeup"><span class="o">&lt;</span><span class="n">button</span><span class="w"> </span><span class="n">drab</span><span class="o">-</span><span class="n">click</span><span class="o">=</span><span class="s1">&apos;button_clicked&apos;</span><span class="o">&gt;</span><span class="n">clickme</span><span class="o">&lt;/</span><span class="n">button</span><span class="o">&gt;</span></code></pre>
+<p>Normally Drab operates on the user interface of the browser which generared the event, but it is possible to broadcast
+the change to all the browsers which are currently viewing the same page. See the bang functions in <a href="Drab.Query.html"><code class="inline">Drab.Query</code></a> module.</p>
+<h2 id="module-event-handler-functions" class="section-heading">
+  <a href="#module-event-handler-functions" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Event handler functions
+</h2>
+
+<p>The event handler function receives two parameters:</p>
+<ul>
+<li><code class="inline">socket</code> - the websocket used to communicate back to the page by <a href="Drab.Query.html"><code class="inline">Drab.Query</code></a> functions
+</li>
+<li><code class="inline">sender</code> - a map contains information of the object which sent the event; keys are binary strings
+</li>
+</ul>
+<p>The <code class="inline">sender</code> map:</p>
+<pre><code class="nohighlight makeup"><span class="p" data-group-id="199">%{</span><span class="w">
+  </span><span class="s2">&quot;id&quot;</span><span class="w">      </span><span class="o">=&gt;</span><span class="w"> </span><span class="s2">&quot;sender object ID attribute&quot;</span><span class="p">,</span><span class="w">
+  </span><span class="s2">&quot;name&quot;</span><span class="w">    </span><span class="o">=&gt;</span><span class="w"> </span><span class="s2">&quot;sender object &apos;name&apos; attribute&quot;</span><span class="p">,</span><span class="w">
+  </span><span class="s2">&quot;class&quot;</span><span class="w">   </span><span class="o">=&gt;</span><span class="w"> </span><span class="s2">&quot;sender object &apos;class&apos; attribute&quot;</span><span class="p">,</span><span class="w">
+  </span><span class="s2">&quot;text&quot;</span><span class="w">    </span><span class="o">=&gt;</span><span class="w"> </span><span class="s2">&quot;sender node &apos;text&apos;&quot;</span><span class="p">,</span><span class="w">
+  </span><span class="s2">&quot;html&quot;</span><span class="w">    </span><span class="o">=&gt;</span><span class="w"> </span><span class="s2">&quot;sender node &apos;html&apos;, result of running .html() on the node&quot;</span><span class="p">,</span><span class="w">
+  </span><span class="s2">&quot;value&quot;</span><span class="w">   </span><span class="o">=&gt;</span><span class="w"> </span><span class="s2">&quot;sender object value&quot;</span><span class="p">,</span><span class="w">
+  </span><span class="s2">&quot;data&quot;</span><span class="w">    </span><span class="o">=&gt;</span><span class="w"> </span><span class="s2">&quot;a map with sender object &apos;data-xxxx&apos; attributes, where &apos;xxxx&apos; are the keys&quot;</span><span class="p">,</span><span class="w">
+  </span><span class="s2">&quot;event&quot;</span><span class="w">   </span><span class="o">=&gt;</span><span class="w"> </span><span class="s2">&quot;a map with choosen properties of `event` object&quot;</span><span class="w">
+  </span><span class="s2">&quot;drab_id&quot;</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s2">&quot;internal&quot;</span><span class="w">
+  </span><span class="s2">&quot;form&quot;</span><span class="w">    </span><span class="o">=&gt;</span><span class="w"> </span><span class="s2">&quot;a map of values of the sourrounding form&quot;</span><span class="w">
+  </span><span class="ss">:params</span><span class="w">   </span><span class="o">=&gt;</span><span class="w"> </span><span class="s2">&quot;a map of values of the sourrounding form, normalized to controller type params&quot;</span><span class="w">
+</span><span class="p" data-group-id="199">}</span></code></pre>
+<p>The <code class="inline">event</code> map contains choosen properties of <code class="inline">event</code> object:</p>
+<pre><code class="nohighlight makeup"><span class="n">altKey</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="p">,</span><span class="w"> </span><span class="n">key</span><span class="p">,</span><span class="w"> </span><span class="n">keyCode</span><span class="p">,</span><span class="w"> </span><span class="n">metaKey</span><span class="p">,</span><span class="w"> </span><span class="n">shiftKey</span><span class="p">,</span><span class="w"> </span><span class="n">ctrlKey</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="p">,</span><span class="w"> </span><span class="n">which</span><span class="p">,</span><span class="w">
+</span><span class="n">clientX</span><span class="p">,</span><span class="w"> </span><span class="n">clientY</span><span class="p">,</span><span class="w"> </span><span class="n">offsetX</span><span class="p">,</span><span class="w"> </span><span class="n">offsetY</span><span class="p">,</span><span class="w"> </span><span class="n">pageX</span><span class="p">,</span><span class="w"> </span><span class="n">pageY</span><span class="p">,</span><span class="w"> </span><span class="n">screenX</span><span class="p">,</span><span class="w"> </span><span class="n">screenY</span></code></pre>
+<p>Example:</p>
+<pre><code class="nohighlight makeup"><span class="kd">def</span><span class="w"> </span><span class="nf">button_clicked</span><span class="p" data-group-id="93">(</span><span class="n">socket</span><span class="p">,</span><span class="w"> </span><span class="n">sender</span><span class="p" data-group-id="93">)</span><span class="w"> </span><span class="k" data-group-id="121">do</span><span class="w">
+  </span><span class="c1"># using Drab.Query
+</span><span class="w">  </span><span class="n">socket</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">update</span><span class="p" data-group-id="120">(</span><span class="ss">:text</span><span class="p">,</span><span class="w"> </span><span class="ss">set</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;clicked&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">on</span><span class="p">:</span><span class="w"> </span><span class="n">this</span><span class="p" data-group-id="119">(</span><span class="n">sender</span><span class="p" data-group-id="119">)</span><span class="p" data-group-id="120">)</span><span class="w">
+</span><span class="k" data-group-id="121">end</span></code></pre>
+<p><code class="inline">sender</code> may contain more fields, depending on the used Drab module. Refer to module documentation for more.</p>
+<h3 id="module-form-values" class="section-heading">
+  <a href="#module-form-values" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Form values
+</h3>
+
+<p>If the sender object is inside a <form> tag, it sends the “form” map, which contains values of all the inputs
+found withing the form. Keys of that map are “name” attribute of the input or, if not found, an “id”
+attribute. If neither “name” or “id” is given, the value of the form is not included.</p>
+<h2 id="module-running-elixir-code-from-the-browser" class="section-heading">
+  <a href="#module-running-elixir-code-from-the-browser" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Running Elixir code from the Browser
+</h2>
+
+<p>There is the Javascript method <code class="inline">Drab.run_handler()</code> in global <a href="Drab.html"><code class="inline">Drab</code></a> object, which allows you to run the Elixir
+function defined in the Commander.</p>
+<pre><code class="nohighlight makeup"><span class="nc">Drab</span><span class="o">.</span><span class="n">run_handler</span><span class="p" data-group-id="101">(</span><span class="n">event_name</span><span class="p">,</span><span class="w"> </span><span class="n">function_name</span><span class="p">,</span><span class="w"> </span><span class="n">argument</span><span class="p" data-group-id="101">)</span></code></pre>
+<p>Arguments:</p>
+<ul>
+<li>event_name(string) - name of the even which runs the function
+</li>
+<li>function_name(string) - function name in corresponding Commander module
+</li>
+<li>argument(anything) - any argument you want to pass to the Commander function
+</li>
+</ul>
+<p>Returns:</p>
+<ul>
+<li>no return, does not wait for any answer
+</li>
+</ul>
+<p>Example:</p>
+<pre><code class="nohighlight makeup"><span class="o">&lt;</span><span class="n">button</span><span class="w"> </span><span class="n">onclick</span><span class="o">=</span><span class="s2">&quot;Drab.run_handler(&apos;click&apos;, &apos;clicked&apos;, {click: &apos;clickety-click&apos;});&quot;</span><span class="o">&gt;</span><span class="w">
+  </span><span class="nc">Clickme</span><span class="w">
+</span><span class="o">&lt;/</span><span class="n">button</span><span class="o">&gt;</span></code></pre>
+<p>The code above runs function named <code class="inline">clicked</code> in the corresponding Commander, with
+the argument <code class="inline">%{&quot;click&quot; =&gt; &quot;clickety-click}&quot;</code></p>
+<h2 id="module-store" class="section-heading">
+  <a href="#module-store" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Store
+</h2>
+
+<p>Analogically to Plug, Drab can store the values in its own session. To avoid confusion with the Plug Session session,
+it is called a Store. You can use functions: <a href="#put_store/3"><code class="inline">put_store/3</code></a> and <a href="#get_store/2"><code class="inline">get_store/2</code></a> to read and write the values
+in the Store. It works exactly the same way as a “normal”, Phoenix session.</p>
+<ul>
+<li>By default, Drab Store is kept in browser Local Storage. This means it is gone when you close the browser
+  or the tab. You may set up where to keep the data with drab_store_storage config entry.
+</li>
+<li>Drab Store is not the Plug Session! This is a different entity. Anyway, you have an access
+  to the Plug Session (details below).
+</li>
+<li>Drab Store is stored on the client side and it is signed, but - as the Plug Session cookie - not ciphered.
+</li>
+</ul>
+<h2 id="module-session" class="section-heading">
+  <a href="#module-session" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Session
+</h2>
+
+<p>Although Drab Store is a different entity than Plug Session (used in Controllers), there is a way
+to access the Session. First, you need to whitelist the keys you want to access in <code class="inline">access_session/1</code> macro
+in the Commander (you may give it a list of atoms or a single atom). Whitelisting is due to security:
+it is kept in Token, on the client side, and it is signed but not encrypted.</p>
+<pre><code class="nohighlight makeup"><span class="kd">defmodule</span><span class="w"> </span><span class="nc">DrabPoc.PageCommander</span><span class="w"> </span><span class="k" data-group-id="136">do</span><span class="w">
+  </span><span class="kn">use</span><span class="w"> </span><span class="nc">Drab.Commander</span><span class="w">
+
+  </span><span class="n">onload</span><span class="w"> </span><span class="ss">:page_loaded</span><span class="p">,</span><span class="w">
+  </span><span class="n">access_session</span><span class="w"> </span><span class="ss">:drab_test</span><span class="w">
+
+  </span><span class="kd">def</span><span class="w"> </span><span class="nf">page_loaded</span><span class="p" data-group-id="104">(</span><span class="n">socket</span><span class="p" data-group-id="104">)</span><span class="w"> </span><span class="k" data-group-id="133">do</span><span class="w">
+    </span><span class="n">socket</span><span class="w">
+    </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">update</span><span class="p" data-group-id="130">(</span><span class="ss">:val</span><span class="p">,</span><span class="w"> </span><span class="ss">set</span><span class="p">:</span><span class="w"> </span><span class="n">get_session</span><span class="p" data-group-id="122">(</span><span class="n">socket</span><span class="p">,</span><span class="w"> </span><span class="ss">:drab_test</span><span class="p" data-group-id="122">)</span><span class="p">,</span><span class="w"> </span><span class="ss">on</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#show_session_test&quot;</span><span class="p" data-group-id="130">)</span><span class="w">
+  </span><span class="k" data-group-id="133">end</span><span class="w">
+</span><span class="k" data-group-id="136">end</span></code></pre>
+<p>There is no way to update the session from Drab. Session is read-only.</p>
+<h2 id="module-broadcasting" class="section-heading">
+  <a href="#module-broadcasting" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Broadcasting
+</h2>
+
+<p>You may use Drab for broadcasting changes to all connected browsers. Drab uses a <em>subject</em> for distinguishing
+browsers, which are allowed to receive the change.</p>
+<p>Broadcasting function receives <code class="inline">socket</code> or <code class="inline">subject</code> as the first argument. If <code class="inline">socket</code> is used, function
+derives the <code class="inline">subject</code> from the commander configuration. See <a href="Drab.Commander.html#broadcasting/1"><code class="inline">Drab.Commander.broadcasting/1</code></a> to learn how to
+configure the broadcasting options.</p>
+<p>Broadcasting functions may be launched without the <code class="inline">socket</code> given. In this case, you need to define it manually,
+using helper functions: <a href="Drab.Core.html#same_path/1"><code class="inline">Drab.Core.same_path/1</code></a>, <a href="Drab.Core.html#same_topic/1"><code class="inline">Drab.Core.same_topic/1</code></a> and <a href="Drab.Core.html#same_controller/1"><code class="inline">Drab.Core.same_controller/1</code></a>.
+See <a href="#broadcast_js/3"><code class="inline">broadcast_js/3</code></a> for more.</p>
+<p>List of broadcasting functions:</p>
+<ul>
+<li><p><a href="Drab.Core.html#content"><code class="inline">Drab.Core</code></a>:</p>
+<ul>
+<li><a href="Drab.Core.html#broadcast_js/3"><code class="inline">Drab.Core.broadcast_js/3</code></a>
+</li>
+<li><a href="Drab.Core.html#broadcast_js!/3"><code class="inline">Drab.Core.broadcast_js!/3</code></a>
+</li>
+</ul>
+</li>
+<li><p><a href="Drab.Element.html"><code class="inline">Drab.Element</code></a>:</p>
+<ul>
+<li><a href="Drab.Element.html#broadcast_insert/4"><code class="inline">Drab.Element.broadcast_insert/4</code></a>
+</li>
+<li><a href="Drab.Element.html#broadcast_prop/3"><code class="inline">Drab.Element.broadcast_prop/3</code></a>
+</li>
+</ul>
+</li>
+<li><p><a href="Drab.Query.html"><code class="inline">Drab.Query</code></a>:</p>
+<ul>
+<li><a href="Drab.Query.html#delete!/2"><code class="inline">Drab.Query.delete!/2</code></a>
+</li>
+<li><a href="Drab.Query.html#execute/2"><code class="inline">Drab.Query.execute/2</code></a>, <a href="Drab.Query.html#execute/3"><code class="inline">Drab.Query.execute/3</code></a>
+</li>
+<li><a href="Drab.Query.html#insert!/2"><code class="inline">Drab.Query.insert!/2</code></a>, <a href="Drab.Query.html#insert!/3"><code class="inline">Drab.Query.insert!/3</code></a>
+</li>
+<li><a href="Drab.Query.html#update!/2"><code class="inline">Drab.Query.update!/2</code></a>, <a href="Drab.Query.html#update!/3"><code class="inline">Drab.Query.update!/3</code></a>
+</li>
+</ul>
+</li>
+</ul>
+
+        </section>
+      
+
+      
+        <section id="summary" class="details-list">
+          <h1 class="section-heading">
+            <a class="hover-link" href="#summary">
+              <span class="icon-link" aria-hidden="true"></span>
+              <span class="sr-only">Link to this section</span>
+            </a>
+            Summary
+          </h1>
+          
+
+          
+  <div class="summary-functions summary">
+    <h2>
+      <a href="#functions">Functions</a>
+    </h2>
+    <div class="summary-row">
+  <div class="summary-signature">
+    <a href="#broadcast_js/3">broadcast_js(subject, js, options \\ [])</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Asynchronously executes the javascript on all the browsers listening on the given subject</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#broadcast_js!/3">broadcast_js!(subject, js, options \\ [])</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Bang version of <a href="Drab.Core.html#broadcast_js/3"><code class="inline">Drab.Core.broadcast_js/3</code></a></p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#exec_js/3">exec_js(socket, js, options \\ [])</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Synchronously executes the given javascript on the client side</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#exec_js!/3">exec_js!(socket, js, options \\ [])</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Exception raising version of <a href="#exec_js/2"><code class="inline">exec_js/2</code></a></p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#get_session/2">get_session(socket, key)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Returns the value of the Plug Session represented by the given key</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#get_session/3">get_session(socket, key, default)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Returns the value of the Plug Session represented by the given key or <code class="inline">default</code> when key not found</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#get_store/2">get_store(socket, key)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Returns the value of the Drab store represented by the given key</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#get_store/3">get_store(socket, key, default)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Returns the value of the Drab store represented by the given key or <code class="inline">default</code> when key not found</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#put_store/3">put_store(socket, key, value)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Saves the key =&gt; value in the Store. Returns unchanged socket</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#same_controller/1">same_controller(controller)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Helper for broadcasting functions, returns topic for a given controller</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#same_path/1">same_path(url)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Helper for broadcasting functions, returns topic for a given URL path</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#same_topic/1">same_topic(topic)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Helper for broadcasting functions, returns topic for a given topic string.</p>
+<pre><code class="nohighlight makeup"><span class="gp">iex&gt;</span><span class="w"> </span><span class="n">same_topic</span><span class="p" data-group-id="205">(</span><span class="s2">&quot;mytopic&quot;</span><span class="p" data-group-id="205">)</span><span class="w">
+</span><span class="s2">&quot;topic:mytopic&quot;</span></code></pre>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#this/1">this(sender)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Finds the DOM object which triggered the event. To be used only in event handlers</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#this!/1">this!(sender)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Like <a href="#this/1"><code class="inline">this/1</code></a>, but returns object ID, so it may be used with broadcasting functions</p>
+</div>
+  
+</div>
+
+  </div>
+
+
+          
+
+        </section>
+      
+
+      
+
+      
+        <section id="functions" class="details-list">
+          <h1 class="section-heading">
+            <a class="hover-link" href="#functions">
+              <span class="icon-link" aria-hidden="true"></span>
+              <span class="sr-only">Link to this section</span>
+            </a>
+            Functions
+          </h1>
+          <div class="detail" id="broadcast_js/3">
+  
+  
+    <span id="broadcast_js/2"></span>
+  
+  <div class="detail-header">
+    <a href="#broadcast_js/3" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">broadcast_js(subject, js, options \\ [])</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Asynchronously executes the javascript on all the browsers listening on the given subject.</p>
+<p>The subject is derived from the first argument, which could be:</p>
+<ul>
+<li><p>socket - in this case broadcasting option is derived from the setup in the commander.
+  See <a href="Drab.Commander.html#broadcasting/1"><code class="inline">Drab.Commander.broadcasting/1</code></a> for the broadcasting options</p>
+</li>
+<li><p>same_path(string) - sends the JS to browsers sharing (and configured as listening to same_path
+  in <a href="Drab.Commander.html#broadcasting/1"><code class="inline">Drab.Commander.broadcasting/1</code></a>) the same url</p>
+</li>
+<li><p>same_commander(atom) - broadcast goes to all browsers configured with :same_commander</p>
+</li>
+<li><p>same_topic(string) - broadcast goes to all browsers listening to this topic; notice: this
+  is internal Drab topic, not a Phoenix Socket topic</p>
+</li>
+</ul>
+<p>First argument may be a list of the above.</p>
+<p>The second argument is a JavaScript string.</p>
+<p>See <a href="Drab.Commander.html#broadcasting/1"><code class="inline">Drab.Commander.broadcasting/1</code></a> to find out how to change the listen subject.</p>
+<pre><code class="nohighlight makeup"><span class="gp">iex&gt;</span><span class="w"> </span><span class="nc">Drab.Core</span><span class="o">.</span><span class="n">broadcast_js</span><span class="p" data-group-id="207">(</span><span class="n">socket</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;alert(&apos;Broadcasted!&apos;)&quot;</span><span class="p" data-group-id="207">)</span><span class="w">
+</span><span class="p" data-group-id="209">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="ss">:broadcasted</span><span class="p" data-group-id="209">}</span><span class="w">
+</span><span class="gp">iex&gt;</span><span class="w"> </span><span class="nc">Drab.Core</span><span class="o">.</span><span class="n">broadcast_js</span><span class="p" data-group-id="217">(</span><span class="n">same_path</span><span class="p" data-group-id="213">(</span><span class="s2">&quot;/drab/live&quot;</span><span class="p" data-group-id="213">)</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;alert(&apos;Broadcasted!&apos;)&quot;</span><span class="p" data-group-id="217">)</span><span class="w">
+</span><span class="p" data-group-id="218">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="ss">:broadcasted</span><span class="p" data-group-id="218">}</span><span class="w">
+</span><span class="gp">iex&gt;</span><span class="w"> </span><span class="nc">Drab.Core</span><span class="o">.</span><span class="n">broadcast_js</span><span class="p" data-group-id="220">(</span><span class="n">same_controller</span><span class="p" data-group-id="219">(</span><span class="nc">MyApp.LiveController</span><span class="p" data-group-id="219">)</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;alert(&apos;Broadcasted!&apos;)&quot;</span><span class="p" data-group-id="220">)</span><span class="w">
+</span><span class="p" data-group-id="221">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="ss">:broadcasted</span><span class="p" data-group-id="221">}</span><span class="w">
+</span><span class="gp">iex&gt;</span><span class="w"> </span><span class="nc">Drab.Core</span><span class="o">.</span><span class="n">broadcast_js</span><span class="p" data-group-id="225">(</span><span class="n">same_topic</span><span class="p" data-group-id="222">(</span><span class="s2">&quot;my_topic&quot;</span><span class="p" data-group-id="222">)</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;alert(&apos;Broadcasted!&apos;)&quot;</span><span class="p" data-group-id="225">)</span><span class="w">
+</span><span class="p" data-group-id="226">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="ss">:broadcasted</span><span class="p" data-group-id="226">}</span><span class="w">
+</span><span class="gp">iex&gt;</span><span class="w"> </span><span class="nc">Drab.Core</span><span class="o">.</span><span class="n">broadcast_js</span><span class="p" data-group-id="235">(</span><span class="p" data-group-id="233">[</span><span class="n">same_topic</span><span class="p" data-group-id="231">(</span><span class="s2">&quot;my_topic&quot;</span><span class="p" data-group-id="231">)</span><span class="p">,</span><span class="w"> </span><span class="n">same_path</span><span class="p" data-group-id="232">(</span><span class="s2">&quot;/drab/live&quot;</span><span class="p" data-group-id="232">)</span><span class="p" data-group-id="233">]</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;alert(&apos;Broadcasted!&apos;)&quot;</span><span class="p" data-group-id="235">)</span><span class="w">
+</span><span class="p" data-group-id="236">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="ss">:broadcasted</span><span class="p" data-group-id="236">}</span></code></pre>
+<p>Returns <code class="inline">{:ok, :broadcasted}</code></p>
+
+  </section>
+</div>
+<div class="detail" id="broadcast_js!/3">
+  
+  
+    <span id="broadcast_js!/2"></span>
+  
+  <div class="detail-header">
+    <a href="#broadcast_js!/3" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">broadcast_js!(subject, js, options \\ [])</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Bang version of <a href="Drab.Core.html#broadcast_js/3"><code class="inline">Drab.Core.broadcast_js/3</code></a></p>
+<p>Returns subject.</p>
+
+  </section>
+</div>
+<div class="detail" id="exec_js/3">
+  
+  
+    <span id="exec_js/2"></span>
+  
+  <div class="detail-header">
+    <a href="#exec_js/3" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">exec_js(socket, js, options \\ [])</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Synchronously executes the given javascript on the client side.</p>
+<p>Returns tuple <code class="inline">{status, return_value}</code>, where status could be <code class="inline">:ok</code> or <code class="inline">:error</code>, and return value
+contains the output computed by the Javascript or the error message.</p>
+<h3 id="exec_js/3-options" class="section-heading">
+  <a href="#exec_js/3-options" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Options
+</h3>
+
+<ul>
+<li><code class="inline">timeout</code> in milliseconds
+</li>
+</ul>
+<h3 id="exec_js/3-examples" class="section-heading">
+  <a href="#exec_js/3-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h3>
+
+<pre><code class="nohighlight makeup"><span class="gp">iex&gt;</span><span class="w"> </span><span class="n">socket</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">exec_js</span><span class="p" data-group-id="239">(</span><span class="s2">&quot;2 + 2&quot;</span><span class="p" data-group-id="239">)</span><span class="w">
+</span><span class="p" data-group-id="241">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p" data-group-id="241">}</span><span class="w">
+
+</span><span class="gp">iex&gt;</span><span class="w"> </span><span class="n">socket</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">exec_js</span><span class="p" data-group-id="242">(</span><span class="s2">&quot;not_existing_function()&quot;</span><span class="p" data-group-id="242">)</span><span class="w">
+</span><span class="p" data-group-id="243">{</span><span class="ss">:error</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;not_existing_function is not defined&quot;</span><span class="p" data-group-id="243">}</span><span class="w">
+
+</span><span class="gp">iex&gt;</span><span class="w"> </span><span class="n">socket</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">exec_js</span><span class="p" data-group-id="247">(</span><span class="s2">&quot;for(i=0; i&lt;1000000000; i++) {}&quot;</span><span class="p" data-group-id="247">)</span><span class="w">
+</span><span class="p" data-group-id="248">{</span><span class="ss">:error</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;timed out after 5000 ms.&quot;</span><span class="p" data-group-id="248">}</span><span class="w">
+
+</span><span class="gp">iex&gt;</span><span class="w"> </span><span class="n">socket</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">exec_js</span><span class="p" data-group-id="250">(</span><span class="s2">&quot;alert(&apos;hello from IEx!&apos;)&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">timeout</span><span class="p">:</span><span class="w"> </span><span class="mi">500</span><span class="p" data-group-id="250">)</span><span class="w">
+</span><span class="p" data-group-id="251">{</span><span class="ss">:error</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;timed out after 500 ms.&quot;</span><span class="p" data-group-id="251">}</span></code></pre>
+
+  </section>
+</div>
+<div class="detail" id="exec_js!/3">
+  
+  
+    <span id="exec_js!/2"></span>
+  
+  <div class="detail-header">
+    <a href="#exec_js!/3" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">exec_js!(socket, js, options \\ [])</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Exception raising version of <a href="#exec_js/2"><code class="inline">exec_js/2</code></a></p>
+<h3 id="exec_js!/3-examples" class="section-heading">
+  <a href="#exec_js!/3-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h3>
+
+<pre><code class="nohighlight makeup"><span class="w">  </span><span class="gp">iex&gt;</span><span class="w"> </span><span class="n">socket</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">exec_js!</span><span class="p" data-group-id="252">(</span><span class="s2">&quot;2 + 2&quot;</span><span class="p" data-group-id="252">)</span><span class="w">
+  </span><span class="mi">4</span><span class="w">
+
+  </span><span class="gp">iex&gt;</span><span class="w"> </span><span class="n">socket</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">exec_js!</span><span class="p" data-group-id="253">(</span><span class="s2">&quot;nonexistent&quot;</span><span class="p" data-group-id="253">)</span><span class="w">
+  </span><span class="o">**</span><span class="w"> </span><span class="p" data-group-id="254">(</span><span class="nc">Drab.JSExecutionError</span><span class="p" data-group-id="254">)</span><span class="w"> </span><span class="n">nonexistent</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">defined</span><span class="w">
+      </span><span class="p" data-group-id="255">(</span><span class="n">drab</span><span class="p" data-group-id="255">)</span><span class="w"> </span><span class="n">lib</span><span class="o">/</span><span class="n">drab</span><span class="o">/</span><span class="n">core</span><span class="o">.</span><span class="n">ex</span><span class="p">:</span><span class="mi">100</span><span class="p">:</span><span class="w"> </span><span class="nc">Drab.Core</span><span class="o">.</span><span class="n">exec_js!</span><span class="o">/</span><span class="mi">2</span><span class="w">
+
+  </span><span class="gp">iex&gt;</span><span class="w"> </span><span class="n">socket</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">exec_js!</span><span class="p" data-group-id="260">(</span><span class="s2">&quot;for(i=0; i&lt;1000000000; i++) {}&quot;</span><span class="p" data-group-id="260">)</span><span class="w">
+  </span><span class="o">**</span><span class="w"> </span><span class="p" data-group-id="261">(</span><span class="nc">Drab.JSExecutionError</span><span class="p" data-group-id="261">)</span><span class="w"> </span><span class="n">timed</span><span class="w"> </span><span class="n">out</span><span class="w"> </span><span class="k">after</span><span class="w"> </span><span class="mi">5000</span><span class="w"> </span><span class="n">ms</span><span class="o">.</span><span class="w">
+      </span><span class="p" data-group-id="262">(</span><span class="n">drab</span><span class="p" data-group-id="262">)</span><span class="w"> </span><span class="n">lib</span><span class="o">/</span><span class="n">drab</span><span class="o">/</span><span class="n">core</span><span class="o">.</span><span class="n">ex</span><span class="p">:</span><span class="mi">100</span><span class="p">:</span><span class="w"> </span><span class="nc">Drab.Core</span><span class="o">.</span><span class="n">exec_js!</span><span class="o">/</span><span class="mi">2</span><span class="w">
+
+  </span><span class="gp">iex&gt;</span><span class="w"> </span><span class="n">socket</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">exec_js!</span><span class="p" data-group-id="265">(</span><span class="s2">&quot;for(i=0; i&lt;10000000; i++) {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">timeout</span><span class="p">:</span><span class="w"> </span><span class="mi">1000</span><span class="p" data-group-id="265">)</span><span class="w">
+  </span><span class="o">**</span><span class="w"> </span><span class="p" data-group-id="267">(</span><span class="nc">Drab.JSExecutionError</span><span class="p" data-group-id="267">)</span><span class="w"> </span><span class="n">timed</span><span class="w"> </span><span class="n">out</span><span class="w"> </span><span class="k">after</span><span class="w"> </span><span class="mi">1000</span><span class="w"> </span><span class="n">ms</span><span class="o">.</span><span class="w">
+      </span><span class="n">lib</span><span class="o">/</span><span class="n">drab</span><span class="o">/</span><span class="n">core</span><span class="o">.</span><span class="n">ex</span><span class="p">:</span><span class="mi">114</span><span class="p">:</span><span class="w"> </span><span class="nc">Drab.Core</span><span class="o">.</span><span class="n">exec_js!</span><span class="o">/</span><span class="mi">3</span></code></pre>
+
+  </section>
+</div>
+<div class="detail" id="get_session/2">
+  
+  
+  <div class="detail-header">
+    <a href="#get_session/2" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">get_session(socket, key)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Returns the value of the Plug Session represented by the given key.</p>
+<pre><code class="nohighlight makeup"><span class="n">counter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">get_session</span><span class="p" data-group-id="271">(</span><span class="n">socket</span><span class="p">,</span><span class="w"> </span><span class="ss">:userid</span><span class="p" data-group-id="271">)</span></code></pre>
+<p>You must explicit which session keys you want to access in <code class="inline">:access_session</code> option in <code class="inline">use Drab.Commander</code>.</p>
+
+  </section>
+</div>
+<div class="detail" id="get_session/3">
+  
+  
+  <div class="detail-header">
+    <a href="#get_session/3" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">get_session(socket, key, default)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Returns the value of the Plug Session represented by the given key or <code class="inline">default</code> when key not found</p>
+<pre><code class="nohighlight makeup"><span class="n">counter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">get_session</span><span class="p" data-group-id="272">(</span><span class="n">socket</span><span class="p">,</span><span class="w"> </span><span class="ss">:userid</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p" data-group-id="272">)</span></code></pre>
+<p>You must explicit which session keys you want to access in <code class="inline">:access_session</code> option in <code class="inline">use Drab.Commander</code>.</p>
+
+  </section>
+</div>
+<div class="detail" id="get_store/2">
+  
+  
+  <div class="detail-header">
+    <a href="#get_store/2" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">get_store(socket, key)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Returns the value of the Drab store represented by the given key.</p>
+<pre><code class="nohighlight makeup"><span class="n">uid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">get_store</span><span class="p" data-group-id="273">(</span><span class="n">socket</span><span class="p">,</span><span class="w"> </span><span class="ss">:user_id</span><span class="p" data-group-id="273">)</span></code></pre>
+
+  </section>
+</div>
+<div class="detail" id="get_store/3">
+  
+  
+  <div class="detail-header">
+    <a href="#get_store/3" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">get_store(socket, key, default)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Returns the value of the Drab store represented by the given key or <code class="inline">default</code> when key not found</p>
+<pre><code class="nohighlight makeup"><span class="n">counter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">get_store</span><span class="p" data-group-id="277">(</span><span class="n">socket</span><span class="p">,</span><span class="w"> </span><span class="ss">:counter</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p" data-group-id="277">)</span></code></pre>
+
+  </section>
+</div>
+<div class="detail" id="put_store/3">
+  
+  
+  <div class="detail-header">
+    <a href="#put_store/3" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">put_store(socket, key, value)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Saves the key =&gt; value in the Store. Returns unchanged socket.</p>
+<pre><code class="nohighlight makeup"><span class="n">put_store</span><span class="p" data-group-id="281">(</span><span class="n">socket</span><span class="p">,</span><span class="w"> </span><span class="ss">:counter</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p" data-group-id="281">)</span></code></pre>
+
+  </section>
+</div>
+<div class="detail" id="same_controller/1">
+  
+  
+  <div class="detail-header">
+    <a href="#same_controller/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">same_controller(controller)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Helper for broadcasting functions, returns topic for a given controller.</p>
+<pre><code class="nohighlight makeup"><span class="gp">iex&gt;</span><span class="w"> </span><span class="n">same_controller</span><span class="p" data-group-id="282">(</span><span class="nc">DrabTestApp.LiveController</span><span class="p" data-group-id="282">)</span><span class="w">
+</span><span class="s2">&quot;controller:Elixir.DrabTestApp.LiveController&quot;</span></code></pre>
+
+  </section>
+</div>
+<div class="detail" id="same_path/1">
+  
+  
+  <div class="detail-header">
+    <a href="#same_path/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">same_path(url)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Helper for broadcasting functions, returns topic for a given URL path.</p>
+<pre><code class="nohighlight makeup"><span class="gp">iex&gt;</span><span class="w"> </span><span class="n">same_path</span><span class="p" data-group-id="283">(</span><span class="s2">&quot;/test/live&quot;</span><span class="p" data-group-id="283">)</span><span class="w">
+</span><span class="s2">&quot;same_path:/test/live&quot;</span></code></pre>
+
+  </section>
+</div>
+<div class="detail" id="same_topic/1">
+  
+  
+  <div class="detail-header">
+    <a href="#same_topic/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">same_topic(topic)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Helper for broadcasting functions, returns topic for a given topic string.</p>
+<pre><code class="nohighlight makeup"><span class="gp">iex&gt;</span><span class="w"> </span><span class="n">same_topic</span><span class="p" data-group-id="286">(</span><span class="s2">&quot;mytopic&quot;</span><span class="p" data-group-id="286">)</span><span class="w">
+</span><span class="s2">&quot;topic:mytopic&quot;</span></code></pre>
+
+  </section>
+</div>
+<div class="detail" id="this/1">
+  
+  
+  <div class="detail-header">
+    <a href="#this/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">this(sender)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Finds the DOM object which triggered the event. To be used only in event handlers.</p>
+<pre><code class="nohighlight makeup"><span class="kd">def</span><span class="w"> </span><span class="nf">button_clicked</span><span class="p" data-group-id="291">(</span><span class="n">socket</span><span class="p">,</span><span class="w"> </span><span class="n">sender</span><span class="p" data-group-id="291">)</span><span class="w"> </span><span class="k" data-group-id="305">do</span><span class="w">
+  </span><span class="n">set_prop</span><span class="w"> </span><span class="n">socket</span><span class="p">,</span><span class="w"> </span><span class="n">this</span><span class="p" data-group-id="292">(</span><span class="n">sender</span><span class="p" data-group-id="292">)</span><span class="p">,</span><span class="w"> </span><span class="ss">innerText</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;already clicked&quot;</span><span class="w">
+  </span><span class="n">set_prop</span><span class="w"> </span><span class="n">socket</span><span class="p">,</span><span class="w"> </span><span class="n">this</span><span class="p" data-group-id="303">(</span><span class="n">sender</span><span class="p" data-group-id="303">)</span><span class="p">,</span><span class="w"> </span><span class="ss">disabled</span><span class="p">:</span><span class="w"> </span><span class="no">true</span><span class="w">
+</span><span class="k" data-group-id="305">end</span></code></pre>
+<p>Do not use it with with broadcast functions (<code class="inline">Drab.Query.update!</code>, <code class="inline">Drab.Core.broadcast_js</code>, etc),
+because it returns the <em>exact</em> DOM object in <em>exact</em> browser. In case if you want to broadcast, use
+<a href="#this!/1"><code class="inline">this!/1</code></a> instead.</p>
+
+  </section>
+</div>
+<div class="detail" id="this!/1">
+  
+  
+  <div class="detail-header">
+    <a href="#this!/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">this!(sender)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Like <a href="#this/1"><code class="inline">this/1</code></a>, but returns object ID, so it may be used with broadcasting functions.</p>
+<pre><code class="nohighlight makeup"><span class="kd">def</span><span class="w"> </span><span class="nf">button_clicked</span><span class="p" data-group-id="309">(</span><span class="n">socket</span><span class="p">,</span><span class="w"> </span><span class="n">sender</span><span class="p" data-group-id="309">)</span><span class="w"> </span><span class="k" data-group-id="318">do</span><span class="w">
+  </span><span class="n">socket</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">update!</span><span class="p" data-group-id="315">(</span><span class="ss">:text</span><span class="p">,</span><span class="w"> </span><span class="ss">set</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;alread clicked&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">on</span><span class="p">:</span><span class="w"> </span><span class="n">this!</span><span class="p" data-group-id="314">(</span><span class="n">sender</span><span class="p" data-group-id="314">)</span><span class="p" data-group-id="315">)</span><span class="w">
+  </span><span class="n">socket</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">update!</span><span class="p" data-group-id="317">(</span><span class="ss">attr</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;disabled&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">set</span><span class="p">:</span><span class="w"> </span><span class="no">true</span><span class="p">,</span><span class="w"> </span><span class="ss">on</span><span class="p">:</span><span class="w"> </span><span class="n">this!</span><span class="p" data-group-id="316">(</span><span class="n">sender</span><span class="p" data-group-id="316">)</span><span class="p" data-group-id="317">)</span><span class="w">
+</span><span class="k" data-group-id="318">end</span></code></pre>
+<p>Raises exception when being used on the object without an ID.</p>
+
+  </section>
+</div>
+
+        </section>
+      
+
+      
+          <footer class="footer">
+        <p>
+          <span class="line">
+            Built using
+            <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" rel="help" target="_blank">ExDoc</a> (v0.17.1),
+          </span>
+          <span class="line">
+            designed by
+            <a href="https://twitter.com/dignifiedquire" target="_blank" title="@dignifiedquire">Friedel Ziegelmayer</a>.
+            </span>
+        </p>
+        <button class="night-mode-toggle"><span class="sr-only">Switch theme</span></button>
+      </footer>
+    </div>
+  </div>
+</section>
+</div>
+  <script src="dist/app-4cfb39be16.js"></script>
+  <script src="assets/makedown.js"></script>
+  </body>
+</html>
+

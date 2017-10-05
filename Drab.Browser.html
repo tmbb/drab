@@ -1,0 +1,449 @@
+    <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="ExDoc v0.17.1">
+    <title>Drab.Browser – drab v0.5.6</title>
+    <link rel="stylesheet" href="dist/app-110d9134a6.css" />
+    
+    
+      
+        <link rel="icon" type="image/png" href="assets/logo.png" />
+      
+      
+    
+    <script src="dist/sidebar_items-6fa2c1b3f2.js"></script>
+    <link rel="stylesheet" href="assets/makedown.css"/>
+  </head>
+  <body data-type="modules">
+    <script>try { if(localStorage.getItem('night-mode')) document.body.className += ' night-mode'; } catch (e) { }</script>
+
+    <div class="main">
+<button class="sidebar-toggle">
+  <span class="icon-menu" aria-hidden="true"></span>
+  <span class="sr-only">Toggle Sidebar</span>
+</button>
+<section class="sidebar">
+
+  
+  <a href="Drab.html" class="sidebar-projectLink">
+    <div class="sidebar-projectDetails">
+      <h1 class="sidebar-projectName">
+        drab
+      </h1>
+      <h2 class="sidebar-projectVersion">
+        v0.5.6
+      </h2>
+    </div>
+    
+      <img src="assets/logo.png" alt="drab" class="sidebar-projectImage">
+    
+  </a>
+
+  <form class="sidebar-search" action="search.html">
+    <button type="submit" class="search-button">
+      <span class="icon-search" aria-hidden="true"></span>
+    </button>
+    <input name="q" type="text" id="search-list" class="search-input" placeholder="search" aria-label="Search" autocomplete="off" />
+  </form>
+
+  <ul class="sidebar-listNav">
+    <li><a id="extras-list" href="#full-list">Pages</a></li>
+
+    
+      <li><a id="modules-list" href="#full-list">Modules</a></li>
+    
+
+    
+      <li><a id="exceptions-list" href="#full-list">Exceptions</a></li>
+    
+
+    
+      <li><a id="tasks-list" href="#full-list">Mix Tasks</a></li>
+    
+  </ul>
+  <div class="gradient"></div>
+  <ul id="full-list" class="sidebar-fullList"></ul>
+</section>
+
+<section class="content">
+  <div class="content-outer">
+    <div id="content" class="content-inner">
+
+
+      <h1>
+        <small class="visible-xs">drab v0.5.6</small>
+        Drab.Browser
+        
+      </h1>
+
+      
+        <section id="moduledoc">
+          <p>Browser related functions.</p>
+<p>Provides information about connected browser, such as local datetime, user agent.</p>
+
+        </section>
+      
+
+      
+        <section id="summary" class="details-list">
+          <h1 class="section-heading">
+            <a class="hover-link" href="#summary">
+              <span class="icon-link" aria-hidden="true"></span>
+              <span class="sr-only">Link to this section</span>
+            </a>
+            Summary
+          </h1>
+          
+
+          
+  <div class="summary-functions summary">
+    <h2>
+      <a href="#functions">Functions</a>
+    </h2>
+    <div class="summary-row">
+  <div class="summary-signature">
+    <a href="#console/2">console(socket, log)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Sends the log to the browser console for debugging</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#console!/2">console!(socket, log)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Broadcasts the log to the browser consoles for debugging/</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#language/1">language(socket)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Returns browser language</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#languages/1">languages(socket)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Returns a list of browser supported languages</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#now/1">now(socket)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Returns local browser time as NaiveDateTime. Timezone information is not included</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#redirect_to/2">redirect_to(socket, url)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Redirects to the given url</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#redirect_to!/2">redirect_to!(socket, url)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Broadcast version of <code class="inline">redirect_to</code></p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#set_url/2">set_url(socket, url)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Replaces the URL in the browser navigation bar for the given URL</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#user_agent/1">user_agent(socket)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Returns browser information (userAgent)</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#utc_offset/1">utc_offset(socket)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Returns utc offset (the difference between local browser time and UTC time), in seconds</p>
+</div>
+  
+</div>
+
+  </div>
+
+
+          
+
+        </section>
+      
+
+      
+
+      
+        <section id="functions" class="details-list">
+          <h1 class="section-heading">
+            <a class="hover-link" href="#functions">
+              <span class="icon-link" aria-hidden="true"></span>
+              <span class="sr-only">Link to this section</span>
+            </a>
+            Functions
+          </h1>
+          <div class="detail" id="console/2">
+  
+  
+  <div class="detail-header">
+    <a href="#console/2" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">console(socket, log)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Sends the log to the browser console for debugging.</p>
+
+  </section>
+</div>
+<div class="detail" id="console!/2">
+  
+  
+  <div class="detail-header">
+    <a href="#console!/2" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">console!(socket, log)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Broadcasts the log to the browser consoles for debugging/</p>
+
+  </section>
+</div>
+<div class="detail" id="language/1">
+  
+  
+  <div class="detail-header">
+    <a href="#language/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">language(socket)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Returns browser language.</p>
+<p>Example:</p>
+<pre><code class="nohighlight makeup"><span class="gp">iex&gt;</span><span class="w"> </span><span class="nc">Drab.Browser</span><span class="o">.</span><span class="n">language</span><span class="p" data-group-id="54">(</span><span class="n">socket</span><span class="p" data-group-id="54">)</span><span class="w">  
+</span><span class="s2">&quot;en-GB&quot;</span></code></pre>
+
+  </section>
+</div>
+<div class="detail" id="languages/1">
+  
+  
+  <div class="detail-header">
+    <a href="#languages/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">languages(socket)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Returns a list of browser supported languages.</p>
+<p>Example:</p>
+<pre><code class="nohighlight makeup"><span class="gp">iex&gt;</span><span class="w"> </span><span class="nc">Drab.Browser</span><span class="o">.</span><span class="n">languages</span><span class="p" data-group-id="70">(</span><span class="n">socket</span><span class="p" data-group-id="70">)</span><span class="w">  
+</span><span class="p" data-group-id="88">[</span><span class="s2">&quot;en-US&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;en&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;pl&quot;</span><span class="p" data-group-id="88">]</span></code></pre>
+
+  </section>
+</div>
+<div class="detail" id="now/1">
+  
+  
+  <div class="detail-header">
+    <a href="#now/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">now(socket)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Returns local browser time as NaiveDateTime. Timezone information is not included.</p>
+<p>Examples:</p>
+<pre><code class="nohighlight makeup"><span class="gp">iex&gt;</span><span class="w"> </span><span class="nc">Drab.Browser</span><span class="o">.</span><span class="n">now</span><span class="p" data-group-id="105">(</span><span class="n">socket</span><span class="p" data-group-id="105">)</span><span class="w">                                                  
+</span><span class="sx">~N[2017-04-01 15:07:57.027000]</span></code></pre>
+
+  </section>
+</div>
+<div class="detail" id="redirect_to/2">
+  
+  
+  <div class="detail-header">
+    <a href="#redirect_to/2" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">redirect_to(socket, url)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Redirects to the given url.</p>
+<p>WARNING: redirection will disconnect the current websocket, so it should be the last function launched in the
+handler.</p>
+
+  </section>
+</div>
+<div class="detail" id="redirect_to!/2">
+  
+  
+  <div class="detail-header">
+    <a href="#redirect_to!/2" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">redirect_to!(socket, url)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Broadcast version of <code class="inline">redirect_to</code>.</p>
+<p>WARNING: redirection will disconnect the current websocket, so it should be the last function launched in the
+handler.</p>
+
+  </section>
+</div>
+<div class="detail" id="set_url/2">
+  
+  
+  <div class="detail-header">
+    <a href="#set_url/2" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">set_url(socket, url)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Replaces the URL in the browser navigation bar for the given URL.</p>
+<p>The new URL can be absolute or relative to the current path. It must have the same origin as the current one.</p>
+<pre><code class="nohighlight makeup"><span class="gp">iex&gt;</span><span class="w"> </span><span class="nc">Drab.Browser</span><span class="o">.</span><span class="n">set_url</span><span class="w"> </span><span class="n">socket</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;/servers/1&quot;</span><span class="w">
+</span><span class="p" data-group-id="145">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="no">nil</span><span class="p" data-group-id="145">}</span><span class="w">
+
+</span><span class="gp">iex&gt;</span><span class="w"> </span><span class="nc">Drab.Browser</span><span class="o">.</span><span class="n">set_url</span><span class="w"> </span><span class="n">socket</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;http://google.com/&quot;</span><span class="w">              
+</span><span class="p" data-group-id="163">{</span><span class="ss">:error</span><span class="p">,</span><span class="w">
+ </span><span class="s2">&quot;Failed to execute &apos;pushState&apos; on &apos;History&apos;: A history state object with URL &apos;http://google.com/&apos; 
+  cannot be created in a document with origin &apos;http://localhost:4000&apos; and URL &apos;http://localhost:4000/&apos;.&quot;</span><span class="p" data-group-id="163">}</span></code></pre>
+
+  </section>
+</div>
+<div class="detail" id="user_agent/1">
+  
+  
+  <div class="detail-header">
+    <a href="#user_agent/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">user_agent(socket)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Returns browser information (userAgent).</p>
+<p>Examples:</p>
+<pre><code class="nohighlight makeup"><span class="gp">iex&gt;</span><span class="w"> </span><span class="nc">Drab.Browser</span><span class="o">.</span><span class="n">user_agent</span><span class="p" data-group-id="171">(</span><span class="n">socket</span><span class="p" data-group-id="171">)</span><span class="w">
+</span><span class="s2">&quot;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_4) AppleWebKit/537.36 (KHTML, like Gecko) ...&quot;</span></code></pre>
+
+  </section>
+</div>
+<div class="detail" id="utc_offset/1">
+  
+  
+  <div class="detail-header">
+    <a href="#utc_offset/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">utc_offset(socket)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Returns utc offset (the difference between local browser time and UTC time), in seconds.</p>
+<p>Examples:</p>
+<pre><code class="nohighlight makeup"><span class="gp">iex&gt;</span><span class="w"> </span><span class="nc">Drab.Browser</span><span class="o">.</span><span class="n">utc_offset</span><span class="p" data-group-id="188">(</span><span class="n">socket</span><span class="p" data-group-id="188">)</span><span class="w">
+</span><span class="mi">7200</span><span class="w"> </span><span class="c1"># UTC + 02:00</span></code></pre>
+
+  </section>
+</div>
+
+        </section>
+      
+
+      
+          <footer class="footer">
+        <p>
+          <span class="line">
+            Built using
+            <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" rel="help" target="_blank">ExDoc</a> (v0.17.1),
+          </span>
+          <span class="line">
+            designed by
+            <a href="https://twitter.com/dignifiedquire" target="_blank" title="@dignifiedquire">Friedel Ziegelmayer</a>.
+            </span>
+        </p>
+        <button class="night-mode-toggle"><span class="sr-only">Switch theme</span></button>
+      </footer>
+    </div>
+  </div>
+</section>
+</div>
+  <script src="dist/app-4cfb39be16.js"></script>
+  <script src="assets/makedown.js"></script>
+  </body>
+</html>
+

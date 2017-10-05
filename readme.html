@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="ExDoc v0.17.1">
+    <title>README – drab v0.5.6</title>
+    <link rel="stylesheet" href="dist/app-110d9134a6.css" />
+    
+    
+      
+        <link rel="icon" type="image/png" href="assets/logo.png" />
+      
+      
+    
+    <script src="dist/sidebar_items-6fa2c1b3f2.js"></script>
+    <link rel="stylesheet" href="assets/makedown.css"/>
+  </head>
+  <body data-type="extras">
+    <script>try { if(localStorage.getItem('night-mode')) document.body.className += ' night-mode'; } catch (e) { }</script>
+
+<div class="main">
+<button class="sidebar-toggle">
+  <span class="icon-menu" aria-hidden="true"></span>
+  <span class="sr-only">Toggle Sidebar</span>
+</button>
+<section class="sidebar">
+
+  
+  <a href="Drab.html" class="sidebar-projectLink">
+    <div class="sidebar-projectDetails">
+      <h1 class="sidebar-projectName">
+        drab
+      </h1>
+      <h2 class="sidebar-projectVersion">
+        v0.5.6
+      </h2>
+    </div>
+    
+      <img src="assets/logo.png" alt="drab" class="sidebar-projectImage">
+    
+  </a>
+
+  <form class="sidebar-search" action="search.html">
+    <button type="submit" class="search-button">
+      <span class="icon-search" aria-hidden="true"></span>
+    </button>
+    <input name="q" type="text" id="search-list" class="search-input" placeholder="search" aria-label="Search" autocomplete="off" />
+  </form>
+
+  <ul class="sidebar-listNav">
+    <li><a id="extras-list" href="#full-list">Pages</a></li>
+
+    
+      <li><a id="modules-list" href="#full-list">Modules</a></li>
+    
+
+    
+      <li><a id="exceptions-list" href="#full-list">Exceptions</a></li>
+    
+
+    
+      <li><a id="tasks-list" href="#full-list">Mix Tasks</a></li>
+    
+  </ul>
+  <div class="gradient"></div>
+  <ul id="full-list" class="sidebar-fullList"></ul>
+</section>
+
+<section class="content">
+  <div class="content-outer">
+    <div id="content" class="content-inner">
+
+
+<p><a href="https://tg.pl/drab"><img src="https://raw.githubusercontent.com/grych/drab-poc/master/web/static/assets/images/drab-banner.png" alt="drab logo"/></a></p>
+<p><a href="https://hex.pm/packages/drab"><img src="https://img.shields.io/hexpm/v/drab.svg" alt="hex.pm version"/></a>
+<a href="https://hex.pm/packages/drab"><img src="https://img.shields.io/hexpm/dt/drab.svg?style=flat" alt="hex.pm downloads"/></a>
+<a href="https://hexdocs.pm/drab/"><img src="https://img.shields.io/badge/api-docs-yellow.svg?style=flat" alt="API Docs"/></a>
+<a href="http://inch-ci.org/github/grych/drab"><img src="http://inch-ci.org/github/grych/drab.svg" alt="Inline docs"/></a></p>
+<h3 id="see-demo-page-for-live-demo-and-description" class="section-heading">
+  <a href="#see-demo-page-for-live-demo-and-description" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  See <a href="https://tg.pl/drab">Demo Page</a> for live demo and description.
+</h3>
+
+<p>Drab - Access the browser User Interface from the Server Side. No Javascript programming needed anymore!</p>
+<p>Drab extends Phoenix Framework to “remote control” UI on the browser, live. The idea is to move all User Interface
+logic to the server-side, to eliminate Javascript and Ajax calls.</p>
+<h2 id="teaser" class="section-heading">
+  <a href="#teaser" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Teaser
+</h2>
+
+<ul>
+<li>Client side:
+</li>
+</ul>
+<pre><code class="html"><div class="progress">
+  <div class="progress-bar <%= @progress_bar_class %>" role="progressbar" @style.width=<%= "#{@bar_width}%" %>>
+    <%= "#{@bar_width}%" %>
+  </div>
+</div>
+<button class="btn btn-primary" drab-click="perform_long_process">
+  <%= @long_process_button_text %>
+</button></code></pre>
+<ul>
+<li>Server side:
+</li>
+</ul>
+<pre><code class="nohighlight makeup"><span class="kd">def</span><span class="w"> </span><span class="nf">perform_long_process</span><span class="p" data-group-id="2">(</span><span class="n">socket</span><span class="p">,</span><span class="w"> </span><span class="n">_sender</span><span class="p" data-group-id="2">)</span><span class="w"> </span><span class="k" data-group-id="41">do</span><span class="w">
+  </span><span class="n">poke</span><span class="w"> </span><span class="n">socket</span><span class="p">,</span><span class="w"> </span><span class="ss">progress_bar_class</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;progress-bar-danger&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">long_process_button_text</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Processing...&quot;</span><span class="w">
+
+  </span><span class="n">steps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">:rand</span><span class="o">.</span><span class="n">uniform</span><span class="p" data-group-id="15">(</span><span class="mi">100</span><span class="p" data-group-id="15">)</span><span class="w">
+  </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="mi">1</span><span class="o">..</span><span class="n">steps</span><span class="w"> </span><span class="k" data-group-id="37">do</span><span class="w">
+    </span><span class="nc">Process</span><span class="o">.</span><span class="n">sleep</span><span class="p" data-group-id="31">(</span><span class="ss">:rand</span><span class="o">.</span><span class="n">uniform</span><span class="p" data-group-id="30">(</span><span class="mi">500</span><span class="p" data-group-id="30">)</span><span class="p" data-group-id="31">)</span><span class="w"> </span><span class="c1">#simulate real work
+</span><span class="w">    </span><span class="n">poke</span><span class="w"> </span><span class="n">socket</span><span class="p">,</span><span class="w"> </span><span class="ss">bar_width</span><span class="p">:</span><span class="w"> </span><span class="nc">Float</span><span class="o">.</span><span class="n">round</span><span class="p" data-group-id="36">(</span><span class="n">i</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">100</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">steps</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="36">)</span><span class="w">
+  </span><span class="k" data-group-id="37">end</span><span class="w">
+
+  </span><span class="n">poke</span><span class="w"> </span><span class="n">socket</span><span class="p">,</span><span class="w"> </span><span class="ss">progress_bar_class</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;progress-bar-success&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">long_process_button_text</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Click me to restart&quot;</span><span class="w">
+</span><span class="k" data-group-id="41">end</span></code></pre>
+<h3 id="prerequisites" class="section-heading">
+  <a href="#prerequisites" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Prerequisites
+</h3>
+
+<ol>
+<li><p>Erlang ~&gt; 19</p>
+</li>
+<li><p>Elixir ~&gt; 1.4</p>
+</li>
+<li><p>Phoenix ~&gt; 1.2</p>
+</li>
+<li><p>Brunch</p>
+</li>
+</ol>
+<h2 id="installation" class="section-heading">
+  <a href="#installation" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Installation
+</h2>
+
+<p>  So far the process of the installation is rather manual. In the future it will be automated.</p>
+<ol>
+<li>Add <code class="inline">drab</code> to your list of dependencies in <code class="inline">mix.exs</code> in your Phoenix application and install it:
+</li>
+</ol>
+<pre><code class="nohighlight makeup"><span class="kd">def</span><span class="w"> </span><span class="nf">deps</span><span class="w"> </span><span class="k" data-group-id="8">do</span><span class="w">
+  </span><span class="p" data-group-id="6">[</span><span class="p" data-group-id="5">{</span><span class="ss">:drab</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;~&gt; 0.5&quot;</span><span class="p" data-group-id="5">}</span><span class="p" data-group-id="6">]</span><span class="w">
+</span><span class="k" data-group-id="8">end</span></code></pre>
+<pre><code class="bash">$ mix deps.get
+$ mix compile</code></pre>
+<ol start="2">
+<li>Initialize Drab client library by adding to the layout page (<code class="inline">app.html.eex</code>)
+</li>
+</ol>
+<pre><code class="html"><%= Drab.Client.js(@conn) %></code></pre>
+<p>  just after the following line:</p>
+<pre><code class="html"><script src="<%= static_path(@conn, "/js/app.js") %>"></script></code></pre>
+<ol start="3">
+<li>Initialize Drab sockets by adding the following to <code class="inline">user_socket.ex</code>:
+</li>
+</ol>
+<pre><code class="nohighlight makeup"><span class="kn">use</span><span class="w"> </span><span class="nc">Drab.Socket</span></code></pre>
+<ol start="4">
+<li>Add Drab template engine to <code class="inline">config.exs</code>:
+</li>
+</ol>
+<pre><code class="nohighlight makeup"><span class="n">config</span><span class="w"> </span><span class="ss">:phoenix</span><span class="p">,</span><span class="w"> </span><span class="ss">:template_engines</span><span class="p">,</span><span class="w">
+  </span><span class="ss">drab</span><span class="p">:</span><span class="w"> </span><span class="nc">Drab.Live.Engine</span></code></pre>
+<ol start="5">
+<li>Add <code class="inline">:drab</code> to applications started by default in <code class="inline">mix.exs</code>:
+</li>
+</ol>
+<pre><code class="nohighlight makeup"><span class="kd">def</span><span class="w"> </span><span class="nf">application</span><span class="w"> </span><span class="k" data-group-id="14">do</span><span class="w">
+  </span><span class="p" data-group-id="13">[</span><span class="ss">mod</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="4">{</span><span class="nc">MyApp</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="3">[]</span><span class="p" data-group-id="4">}</span><span class="p">,</span><span class="w">
+   </span><span class="ss">applications</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="12">[</span><span class="ss">:phoenix</span><span class="p">,</span><span class="w"> </span><span class="ss">:phoenix_pubsub</span><span class="p">,</span><span class="w"> </span><span class="ss">:phoenix_html</span><span class="p">,</span><span class="w"> </span><span class="ss">:cowboy</span><span class="p">,</span><span class="w"> </span><span class="ss">:logger</span><span class="p">,</span><span class="w"> </span><span class="ss">:gettext</span><span class="p">,</span><span class="w"> </span><span class="ss">:drab</span><span class="p" data-group-id="12">]</span><span class="p" data-group-id="13">]</span><span class="w">
+</span><span class="k" data-group-id="14">end</span></code></pre>
+<p>  It is not needed if you are running Phoenix 1.3</p>
+<ol start="6">
+<li>To enable live reload on Drab pages, add <code class="inline">.drab</code> extension to live reload patterns in <code class="inline">dev.exs</code>:
+</li>
+</ol>
+<pre><code class="nohighlight makeup"><span class="n">config</span><span class="w"> </span><span class="ss">:my_app</span><span class="p">,</span><span class="w"> </span><span class="nc">MyApp.Endpoint</span><span class="p">,</span><span class="w">
+  </span><span class="ss">live_reload</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="21">[</span><span class="w">
+    </span><span class="ss">patterns</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="20">[</span><span class="w">
+      </span><span class="sr">~r{priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$}</span><span class="p">,</span><span class="w">
+      </span><span class="sr">~r{priv/gettext/.*(po)$}</span><span class="p">,</span><span class="w">
+      </span><span class="sr">~r{web/views/.*(ex)$}</span><span class="p">,</span><span class="w">
+      </span><span class="sr">~r{web/templates/.*(eex|drab)$}</span><span class="w">
+    </span><span class="p" data-group-id="20">]</span><span class="w">
+  </span><span class="p" data-group-id="21">]</span></code></pre>
+<ol start="7">
+<li>If your application is <strong>under the umbrella project</strong>, Drab is not able to find its name. In this case, add the app name to the <code class="inline">config.exs</code>:
+</li>
+</ol>
+<pre><code class="nohighlight makeup"><span class="n">config</span><span class="w"> </span><span class="ss">:drab</span><span class="p">,</span><span class="w">
+  </span><span class="ss">main_phoenix_app</span><span class="p">:</span><span class="w"> </span><span class="ss">:my_app</span></code></pre>
+<h4>If you want to use Drab.Query (jQuery based module):</h4>
+<ol>
+<li>Add <code class="inline">jquery</code> and <code class="inline">boostrap</code> to <code class="inline">package.json</code>:
+</li>
+</ol>
+<pre><code class="json">"dependencies": {
+  "jquery": ">= 3.1.1",
+  "bootstrap": "~3.3.7"
+}</code></pre>
+<ol start="2">
+<li>Add jQuery as a global at the end of <code class="inline">brunch-config.js</code>:
+</li>
+</ol>
+<pre><code class="javascript">npm: {globals: {
+  $: 'jquery',
+  jQuery: 'jquery',
+  bootstrap: 'bootstrap'
+}}</code></pre>
+<ol start="3">
+<li>And install it:
+</li>
+</ol>
+<pre><code class="bash">$ npm install && node_modules/brunch/bin/brunch build </code></pre>
+<p>Congratulations! You have installed Drab and you can proceed with your own commanders.</p>
+<h2 id="usage" class="section-heading">
+  <a href="#usage" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Usage
+</h2>
+
+<p>All the Drab functions (callbacks, event handlers) are placed in the module called <code class="inline">Commander</code>. 
+Think about it as a controller for the live pages. Commanders should be placed in <code class="inline">web/commanders</code> directory.</p>
+<p>To enable Drab on specific pages, you need to add the directive <code class="inline">use Drab.Controller</code> to your controller.</p>
+<p>Remember the difference: <code class="inline">controller</code> renders the page, while <code class="inline">commander</code> works on the live page.</p>
+<ol>
+<li>Generate the page Commander. The commander name should correspond to the controller, so PageController should have PageCommander:
+</li>
+</ol>
+<pre><code class="bash">$ mix drab.gen.commander Page
+* creating web/commanders/page_commander.ex
+
+Add the following line to your Example.PageController:
+    use Drab.Controller </code></pre>
+<ol start="2">
+<li>As described in the previous task, add <a href="Drab.Controller.html"><code class="inline">Drab.Controller</code></a> to your page Controller (eg. <code class="inline">web/controllers/page_controller.ex</code> in the default app):
+</li>
+</ol>
+<pre><code class="nohighlight makeup"><span class="kd">defmodule</span><span class="w"> </span><span class="nc">MyApp.PageController</span><span class="w"> </span><span class="k" data-group-id="19">do</span><span class="w">
+  </span><span class="kn">use</span><span class="w"> </span><span class="nc">Example.Web</span><span class="p">,</span><span class="w"> </span><span class="ss">:controller</span><span class="w">
+  </span><span class="kn">use</span><span class="w"> </span><span class="nc">Drab.Controller</span><span class="w"> 
+
+  </span><span class="kd">def</span><span class="w"> </span><span class="nf">index</span><span class="p" data-group-id="10">(</span><span class="n">conn</span><span class="p">,</span><span class="w"> </span><span class="n">_params</span><span class="p" data-group-id="10">)</span><span class="w"> </span><span class="k" data-group-id="16">do</span><span class="w">
+    </span><span class="n">render</span><span class="w"> </span><span class="n">conn</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;index.html&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">welcome_text</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Welcome to Phoenix!&quot;</span><span class="w">
+  </span><span class="k" data-group-id="16">end</span><span class="w">
+</span><span class="k" data-group-id="19">end</span><span class="w">    </span></code></pre>
+<p>  Also add the <code class="inline">@welcome_text</code> assign to <code class="inline">render/3</code> in index action, to be used in the future.</p>
+<ol start="3">
+<li><p>Rename the template from <code class="inline">web/templates/page/index.html.eex</code> to <code class="inline">index.html.drab</code></p>
+</li>
+<li><p>Edit the template <code class="inline">web/templates/page/index.html.drab</code> and change the fixed welcome text to the assign:</p>
+</li>
+</ol>
+<pre><code class="html"><div class="jumbotron">
+  <h2><%= @welcome_text %></h2></code></pre>
+<ol start="3">
+<li>Edit the commander file <code class="inline">web/commanders/page_commander.ex</code> and add some real action - the <code class="inline">onload</code> callback, which fires when the browser connects to the Drab server:
+</li>
+</ol>
+<pre><code class="nohighlight makeup"><span class="kd">defmodule</span><span class="w"> </span><span class="nc">DrabExample.PageCommander</span><span class="w"> </span><span class="k" data-group-id="24">do</span><span class="w">
+  </span><span class="kn">use</span><span class="w"> </span><span class="nc">Drab.Commander</span><span class="w">
+
+  </span><span class="n">onload</span><span class="w"> </span><span class="ss">:page_loaded</span><span class="w">
+
+  </span><span class="c1"># Drab Callbacks
+</span><span class="w">  </span><span class="kd">def</span><span class="w"> </span><span class="nf">page_loaded</span><span class="p" data-group-id="7">(</span><span class="n">socket</span><span class="p" data-group-id="7">)</span><span class="w"> </span><span class="k" data-group-id="23">do</span><span class="w">
+    </span><span class="n">poke</span><span class="w"> </span><span class="n">socket</span><span class="p">,</span><span class="w"> </span><span class="ss">welcome_text</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;This page has been drabbed&quot;</span><span class="w">
+    </span><span class="n">set_prop</span><span class="w"> </span><span class="n">socket</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;div.jumbotron p.lead&quot;</span><span class="p">,</span><span class="w"> 
+      </span><span class="ss">innerHTML</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Please visit &lt;a href=&apos;https://tg.pl/drab&apos;&gt;Drab&lt;/a&gt; page for more&quot;</span><span class="w">
+  </span><span class="k" data-group-id="23">end</span><span class="w">
+</span><span class="k" data-group-id="24">end</span></code></pre>
+<p>The <code class="inline">poke/2</code> function updates the assign. The <code class="inline">set_prop/3</code> updates any property of the DOM object. All is done live, without reloading the page.</p>
+<ol start="4">
+<li>Run <code class="inline">iex -S mix phoenix.server</code>. Go to <code class="inline">http://localhost:4000</code> to see the changed web page. Now you may play with this page live, directly from <code class="inline">iex</code>! Observe the instruction given when your browser connects to the page:
+</li>
+</ol>
+<pre><code class="nohighlight makeup"><span class="p" data-group-id="1">[</span><span class="n">debug</span><span class="p" data-group-id="1">]</span><span class="w"> 
+    </span><span class="nc">Started</span><span class="w"> </span><span class="nc">Drab</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">same_path</span><span class="ss">:/</span><span class="p">,</span><span class="w"> </span><span class="n">handling</span><span class="w"> </span><span class="n">events</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nc">DrabExample.PageCommander</span><span class="w">
+    </span><span class="nc">You</span><span class="w"> </span><span class="n">may</span><span class="w"> </span><span class="n">debug</span><span class="w"> </span><span class="nc">Drab</span><span class="w"> </span><span class="n">functions</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nc">IEx</span><span class="w"> </span><span class="n">by</span><span class="w"> </span><span class="n">copy</span><span class="o">/</span><span class="n">paste</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="ss">following</span><span class="p">:</span><span class="w">
+</span><span class="kn">import</span><span class="w"> </span><span class="nc">Drab</span><span class="o">.</span><span class="p" data-group-id="22">{</span><span class="nc">Core</span><span class="p">,</span><span class="w"> </span><span class="nc">Element</span><span class="p">,</span><span class="w"> </span><span class="nc">Live</span><span class="p" data-group-id="22">}</span><span class="w">
+</span><span class="n">socket</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Drab</span><span class="o">.</span><span class="n">get_socket</span><span class="p" data-group-id="29">(</span><span class="n">pid</span><span class="p" data-group-id="28">(</span><span class="s2">&quot;0.653.0&quot;</span><span class="p" data-group-id="28">)</span><span class="p" data-group-id="29">)</span><span class="w">
+
+    </span><span class="ss">Examples</span><span class="p">:</span><span class="w">
+</span><span class="n">socket</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">exec_js</span><span class="p" data-group-id="32">(</span><span class="s2">&quot;alert(&apos;hello from IEx!&apos;)&quot;</span><span class="p" data-group-id="32">)</span><span class="w">
+</span><span class="n">socket</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">poke</span><span class="p" data-group-id="34">(</span><span class="ss">count</span><span class="p">:</span><span class="w"> </span><span class="mi">42</span><span class="p" data-group-id="34">)</span><span class="w">
+</span></code></pre>
+<p>As instructed, copy and paste those to lines, and check out yourself how could you remote control the displayed page:</p>
+<pre><code class="nohighlight makeup"><span class="gp">iex&gt;</span><span class="w"> </span><span class="n">poke</span><span class="w"> </span><span class="n">socket</span><span class="p">,</span><span class="w"> </span><span class="ss">welcome_text</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;WOW, this is nice&quot;</span><span class="w">
+</span><span class="p" data-group-id="9">%</span><span class="nc" data-group-id="9">Phoenix.Socket</span><span class="p" data-group-id="9">{</span><span class="o">...</span><span class="p" data-group-id="9">}</span><span class="w">
+
+</span><span class="gp">iex&gt;</span><span class="w"> </span><span class="n">query</span><span class="w"> </span><span class="n">socket</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;div.jumbotron h2&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">:innerText</span><span class="w">
+</span><span class="p" data-group-id="27">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w">
+ </span><span class="p" data-group-id="26">%{</span><span class="s2">&quot;[drab-id=&apos;425d4f73-9c14-4189-992b-41539377c9eb&apos;]&quot;</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p" data-group-id="25">%{</span><span class="s2">&quot;innerText&quot;</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s2">&quot;WOW, this is nice&quot;</span><span class="p" data-group-id="25">}</span><span class="p" data-group-id="26">}</span><span class="p" data-group-id="27">}</span><span class="w">
+
+</span><span class="gp">iex&gt;</span><span class="w"> </span><span class="n">set_style</span><span class="w"> </span><span class="n">socket</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;div.jumbotron&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">backgroundColor</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;red&quot;</span><span class="w">
+</span><span class="p" data-group-id="35">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p" data-group-id="35">}</span></code></pre>
+<h3 id="the-example-above-is-available-here" class="section-heading">
+  <a href="#the-example-above-is-available-here" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  The example above is available <a href="https://github.com/grych/drab-example">here</a>
+</h3>
+
+<h2 id="what-now" class="section-heading">
+  <a href="#what-now" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  What now?
+</h2>
+
+<p>Visit <a href="https://tg.pl/drab">Demo Page</a> for a live demo and more description.</p>
+<p>Visit <a href="https://hexdocs.pm/drab">Documentation</a> page.</p>
+<h2 id="getting-help" class="section-heading">
+  <a href="#getting-help" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Getting help
+</h2>
+
+<p>There is a Drab’s thread on <a href="https://elixirforum.com/t/drab-phoenix-library-for-server-side-dom-access/3277">elixirforum.com</a>, please address questions there.</p>
+<h2 id="tests-and-sandbox" class="section-heading">
+  <a href="#tests-and-sandbox" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Tests and Sandbox
+</h2>
+
+<p>Since 0.3.2, Drab is equipped with its own Phoenix Server for automatic integration tests and for sandboxing and play
+with it.</p>
+<h3 id="sandbox" class="section-heading">
+  <a href="#sandbox" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Sandbox
+</h3>
+
+<ul>
+<li>clone Drab from github:
+</li>
+</ul>
+<pre><code class="shell">git clone git@github.com:grych/drab.git
+cd drab</code></pre>
+<ul>
+<li>get deps and node modules:
+</li>
+</ul>
+<pre><code class="shell">mix deps.get
+npm install && node_modules/brunch/bin/brunch build</code></pre>
+<ul>
+<li>start Phoenix with Drab:
+</li>
+</ul>
+<pre><code class="shell">iex -S mix phoenix.server</code></pre>
+<ul>
+<li><p>open the browser and navigate to http://localhost:4000</p>
+</li>
+<li><p>follow the instructions in IEx to play with Drab functions:</p>
+</li>
+</ul>
+<pre><code class="nohighlight makeup"><span class="kn">import</span><span class="w"> </span><span class="nc">Drab</span><span class="o">.</span><span class="p" data-group-id="11">{</span><span class="nc">Core</span><span class="p">,</span><span class="w"> </span><span class="nc">Live</span><span class="p">,</span><span class="w"> </span><span class="nc">Element</span><span class="p">,</span><span class="w"> </span><span class="nc">Query</span><span class="p">,</span><span class="w"> </span><span class="nc">Waiter</span><span class="p" data-group-id="11">}</span><span class="w">
+</span><span class="n">socket</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Drab</span><span class="o">.</span><span class="n">get_socket</span><span class="p" data-group-id="18">(</span><span class="n">pid</span><span class="p" data-group-id="17">(</span><span class="s2">&quot;0.784.0&quot;</span><span class="p" data-group-id="17">)</span><span class="p" data-group-id="18">)</span><span class="w">
+
+</span><span class="gp">iex&gt;</span><span class="w"> </span><span class="n">query</span><span class="w"> </span><span class="n">socket</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;h3&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">:innerText</span><span class="w">
+</span><span class="p" data-group-id="40">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w">
+ </span><span class="p" data-group-id="39">%{</span><span class="s2">&quot;#header&quot;</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p" data-group-id="33">%{</span><span class="s2">&quot;innerText&quot;</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s2">&quot;Drab Tests&quot;</span><span class="p" data-group-id="33">}</span><span class="p">,</span><span class="w">
+   </span><span class="s2">&quot;#page_loaded_indicator&quot;</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p" data-group-id="38">%{</span><span class="s2">&quot;innerText&quot;</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s2">&quot;Page Loaded&quot;</span><span class="p" data-group-id="38">}</span><span class="p" data-group-id="39">}</span><span class="p" data-group-id="40">}</span><span class="w">
+
+</span><span class="gp">iex&gt;</span><span class="w"> </span><span class="n">set_prop</span><span class="w"> </span><span class="n">socket</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;h3&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">innerText</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Updated from IEx&quot;</span><span class="w">
+</span><span class="p" data-group-id="42">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="42">}</span><span class="w">
+
+</span><span class="gp">iex&gt;</span><span class="w"> </span><span class="n">exec_js</span><span class="w"> </span><span class="n">socket</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;alert(&apos;You do like alerts!&apos;)&quot;</span><span class="w">
+</span><span class="p" data-group-id="43">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="no">nil</span><span class="p" data-group-id="43">}</span></code></pre>
+<h3 id="tests" class="section-heading">
+  <a href="#tests" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Tests
+</h3>
+
+<p>Most of the Drab tests are integration (end-to-end) tests, thus they require automated browser. Drab uses <a href="https://sites.google.com/a/chromium.org/chromedriver/">chromedriver</a>, which must be running while you run tests.</p>
+<ul>
+<li>clone Drab from github:
+</li>
+</ul>
+<pre><code class="shell">git clone git@github.com:grych/drab.git
+cd drab</code></pre>
+<ul>
+<li>get deps and node modules:
+</li>
+</ul>
+<pre><code class="shell">mix deps.get
+npm install && node_modules/brunch/bin/brunch build</code></pre>
+<ul>
+<li><p>run <code class="inline">chromedriver</code> </p>
+</li>
+<li><p>run tests:</p>
+</li>
+</ul>
+<pre><code class="shell">% mix test                 
+Compiling 23 files (.ex)
+........................................
+
+Finished in 120.9 seconds
+123 tests, 0 failures
+
+Randomized with seed 934572</code></pre>
+<h2 id="contact" class="section-heading">
+  <a href="#contact" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Contact
+</h2>
+
+<p>(c)2016-2017 Tomek “Grych” Gryszkiewicz, 
+<a href="mailto:grych@tg.pl">grych@tg.pl</a></p>
+<p>Illustrations by https://www.vecteezy.com</p>
+
+      <footer class="footer">
+        <p>
+          <span class="line">
+            Built using
+            <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" rel="help" target="_blank">ExDoc</a> (v0.17.1),
+          </span>
+          <span class="line">
+            designed by
+            <a href="https://twitter.com/dignifiedquire" target="_blank" title="@dignifiedquire">Friedel Ziegelmayer</a>.
+            </span>
+        </p>
+        <button class="night-mode-toggle"><span class="sr-only">Switch theme</span></button>
+      </footer>
+    </div>
+  </div>
+</section>
+</div>
+  <script src="dist/app-4cfb39be16.js"></script>
+  <script src="assets/makedown.js"></script>
+  </body>
+</html>
+
